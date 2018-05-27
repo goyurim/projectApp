@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,8 +30,13 @@ public class CheckBoxListActivity extends AppCompatActivity {
     public void checkBoxCreateButton(View view) {
         ed_cbItem = (EditText) findViewById(R.id.ed_checkboxItem);
         String content = ed_cbItem.getText().toString();
-        adapter.addItem(new CheckBoxItem(content));
-        adapter.notifyDataSetChanged();
+        if(content.equals("") ){
+            Toast.makeText(getApplicationContext(),"추가할 내용을 작성하시오", Toast.LENGTH_LONG).show();
+        }else{
+            adapter.addItem(new CheckBoxItem(content));
+            adapter.notifyDataSetChanged();
+            ed_cbItem.setText("");
+        }
     }
 
     class CheckboxItemAdapter extends BaseAdapter {
