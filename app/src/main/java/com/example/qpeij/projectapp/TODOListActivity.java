@@ -26,9 +26,9 @@ public class TODOListActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listview);
         adapter = new ListItemAdapter();
 
-        adapter.addItem(new CheckListItem("title","goal"));
-        adapter.addItem(new CheckListItem("title2", "goal2"));
-        adapter.addItem(new CheckListItem("title3", "goal3"));
+        adapter.addItem(new CheckListItem("title","달성도"));
+        adapter.addItem(new CheckListItem("title2", "달성도"));
+        adapter.addItem(new CheckListItem("title3", "달성도"));
 
         listView.setAdapter(adapter);
         ed_title = (EditText)findViewById(R.id.ed_listTitle);
@@ -44,8 +44,13 @@ public class TODOListActivity extends AppCompatActivity {
 
     public void checklistCreateButton(View view) {
         String title = ed_title.getText().toString();
-        adapter.addItem(new CheckListItem(title,"goal"));
-        adapter.notifyDataSetChanged();
+        if(title.equals("")){
+            Toast.makeText(getApplicationContext(),"리스트 제목을 입력하시오.",Toast.LENGTH_LONG).show();
+        }else {
+            adapter.addItem(new CheckListItem(title, "달성도"));
+            adapter.notifyDataSetChanged();
+            ed_title.setText("");
+        }
     }
 
 
