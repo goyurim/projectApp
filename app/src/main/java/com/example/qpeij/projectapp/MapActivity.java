@@ -1,9 +1,8 @@
 package com.example.qpeij.projectapp;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -22,19 +21,17 @@ public class MapActivity extends AppCompatActivity {
         PopupMenu pop = new PopupMenu(this,view);
         pop.getMenuInflater().inflate(R.menu.menu,pop.getMenu());
 
-
         pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 //인텐트
                 int id = menuItem.getItemId();
                 if(id==R.id.add){
-                    Toast.makeText(getApplicationContext(),"dd",Toast.LENGTH_SHORT).show();
                     Intent intent2 = new Intent(getApplicationContext(), PhotoAddActivity.class);
                     startActivity(intent2);
                 }
 
-                return true;
+                return MapActivity.super.onOptionsItemSelected(menuItem);
             }
         });
         pop.show();
