@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -22,6 +23,15 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 //인텐트
+                String title = menuItem.getTitle().toString();
+                switch (title){
+                    case "사진넣기":
+                        break;
+                    case "메모하기":
+                        break;
+                    case "내용보기":
+                        break;
+                }
                 return true;
             }
         });
