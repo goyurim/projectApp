@@ -31,6 +31,7 @@ public class CheckBoxListActivity extends AppCompatActivity {
         String content = ed_cbItem.getText().toString();
         adapter.addItem(new CheckBoxItem(content));
         adapter.notifyDataSetChanged();
+        ed_cbItem.setText("");
     }
 
     class CheckboxItemAdapter extends BaseAdapter {
