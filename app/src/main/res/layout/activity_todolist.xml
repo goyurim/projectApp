@@ -1,9 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.example.qpeij.projectapp.TODOListActivity">
+    android:layout_width="match_parent"
+    >
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:text="To Do List"
+        android:layout_gravity="center"/>
 
-</android.support.constraint.ConstraintLayout>
+    <ListView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="5"
+        android:id="@+id/listview">
+
+    </ListView>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:id="@+id/ed_listTitle"
+        android:hint="리스트 제목"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="리스트 추가"
+        android:onClick="checklistCreateButton"/>
+
+</LinearLayout>
+
+</LinearLayout>
