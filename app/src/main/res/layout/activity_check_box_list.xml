@@ -48,7 +48,6 @@
             android:onClick="checkBoxCreateButton"
             android:textStyle="bold"
             android:textColor="#000000"
-            android:background=""
             android:text="추가하기"/>
 
     </LinearLayout>

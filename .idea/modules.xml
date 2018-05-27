@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ColorMap.iml" filepath="$PROJECT_DIR$/ColorMap.iml" />
+      <module fileurl="file://C:\Users\qpeij\AndroidStudioProjects\projectApp\ColorMap.iml" filepath="C:\Users\qpeij\AndroidStudioProjects\projectApp\ColorMap.iml" />
       <module fileurl="file://C:\Users\yoonc\Desktop\kkkkk\ProjectApp\ColorMap.iml" filepath="C:\Users\yoonc\Desktop\kkkkk\ProjectApp\ColorMap.iml" />
       <module fileurl="file://C:\Users\qpeij\AndroidStudioProjects\ColorMap\ProjectApp.iml" filepath="C:\Users\qpeij\AndroidStudioProjects\ColorMap\ProjectApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/projectApp.iml" filepath="$PROJECT_DIR$/projectApp.iml" />
     </modules>
   </component>
 </project>
