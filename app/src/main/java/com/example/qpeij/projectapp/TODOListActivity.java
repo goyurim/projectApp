@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,7 @@ public class TODOListActivity extends AppCompatActivity {
         adapter.addItem(new CheckListItem(title,"goal"));
         adapter.notifyDataSetChanged();
     }
+
 
     class ListItemAdapter extends BaseAdapter {
         ArrayList<CheckListItem> items = new ArrayList<CheckListItem>();

@@ -1,5 +1,7 @@
 package com.example.qpeij.projectapp;
 
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,7 +10,6 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class MapActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +24,12 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 //인텐트
-                String title = menuItem.getTitle().toString();
-                switch (title){
-                    case "사진넣기":
-                        break;
-                    case "메모하기":
-                        break;
-                    case "내용보기":
-                        break;
+                int id = menuItem.getItemId();
+                if(id==R.id.add){
+                    Intent intent = new Intent(getApplicationContext(), PhotoAddActivity.class);
+                    startActivityForResult(intent,103);
                 }
+
                 return true;
             }
         });
