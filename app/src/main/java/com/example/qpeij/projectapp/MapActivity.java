@@ -16,9 +16,12 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
     }
 
+
+
     public void onClickedLocalBtn(View view) {
         PopupMenu pop = new PopupMenu(this,view);
         pop.getMenuInflater().inflate(R.menu.menu,pop.getMenu());
+
 
         pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -26,8 +29,9 @@ public class MapActivity extends AppCompatActivity {
                 //인텐트
                 int id = menuItem.getItemId();
                 if(id==R.id.add){
-                    Intent intent = new Intent(getApplicationContext(), PhotoAddActivity.class);
-                    startActivityForResult(intent,103);
+                    Toast.makeText(getApplicationContext(),"dd",Toast.LENGTH_SHORT).show();
+                    Intent intent2 = new Intent(getApplicationContext(), PhotoAddActivity.class);
+                    startActivity(intent2);
                 }
 
                 return true;
