@@ -1,9 +1,11 @@
 package com.example.qpeij.projectapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -11,7 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class TODOListActivity extends AppCompatActivity {
-
+    public static final int REQUEST_CHECKBOX = 100;
     ListView listView;
     ListItemAdapter adapter;
     EditText ed_title;
@@ -29,6 +31,13 @@ public class TODOListActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
         ed_title = (EditText)findViewById(R.id.ed_listTitle);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                //Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
+                //startActivityForResult(intent,REQUEST_CHECKBOX);
+            }
+        });
     }
 
     public void checklistCreateButton(View view) {
