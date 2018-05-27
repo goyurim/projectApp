@@ -16,13 +16,14 @@ public class CheckBoxListActivity extends AppCompatActivity {
     CheckboxItemAdapter adapter;
     EditText ed_cbItem;
     ListView listView;
-
+    TextView checklistTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_box_list);
         listView = (ListView) findViewById(R.id.checkboxlistview);
         adapter = new CheckboxItemAdapter();
+        checklistTitle = (TextView)findViewById(R.id.checklistTitle);
 
         listView.setAdapter(adapter);
     }
