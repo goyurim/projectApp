@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".MapActivity" />
         <activity android:name=".TODOListActivity" />
-        <activity android:name=".PhotoAddActivity"></activity>
+        <activity android:name=".PhotoAddActivity" />
+        <activity android:name=".CheckBoxListActivity"></activity>
     </application>
 
 </manifest>

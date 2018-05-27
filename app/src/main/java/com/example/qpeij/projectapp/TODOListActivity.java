@@ -32,6 +32,7 @@ public class TODOListActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
         ed_title = (EditText)findViewById(R.id.ed_listTitle);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
