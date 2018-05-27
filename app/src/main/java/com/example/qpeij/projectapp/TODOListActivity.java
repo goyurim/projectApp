@@ -36,7 +36,9 @@ public class TODOListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                CheckListItem item = (CheckListItem)adapter.getItem(position);
                 Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
+                intent.putExtra("title",item.getTitle());
                 startActivityForResult(intent,REQUEST_CHECKBOX);
             }
         });
