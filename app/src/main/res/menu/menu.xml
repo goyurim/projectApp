@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/add"
+        android:title="사진추가"/>
+    <item
+        android:id="@+id/write"
+        android:title="메모하기"/>
+    <item
+        android:id="@+id/show"
+        android:title="내용보기"/>.
+</menu>
