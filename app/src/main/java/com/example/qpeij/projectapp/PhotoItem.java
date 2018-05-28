@@ -1,15 +1,17 @@
 package com.example.qpeij.projectapp;
 
 
+import android.graphics.Bitmap;
+
 public class PhotoItem  {
-    int resId;
-    public PhotoItem(int resId){
+    Bitmap resId;
+    public PhotoItem(Bitmap resId){
         this.resId=resId;
     }
-    public void setResId(int resId) {
+    public void setResId(Bitmap resId) {
         this.resId = resId;
     }
-    public int getResId() {
+    public Bitmap getResId() {
         return resId;
     }
 }

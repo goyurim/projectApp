@@ -1,6 +1,7 @@
 package com.example.qpeij.projectapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ public class PhotoItemView extends LinearLayout {
         photoView=(ImageView)findViewById(R.id.photoView);
 
     }
-    public void setImageView(int resId) {
-        photoView.setImageResource(resId);
+    public void setImageView(Bitmap resId) {
+        photoView.setImageBitmap(resId);
     }
 }

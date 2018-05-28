@@ -16,11 +16,22 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+import android.app.*;
+import android.content.*;
+import android.net.*;
+import android.os.*;
+import android.view.*;
+import android.graphics.*;
+import android.widget.*;
+import android.provider.*;
 
 public class PhotoAddActivity extends AppCompatActivity {
     Button photoAdd;
     GridView photoListView;
     PhotoAdapter photoAdapter;
+    private final int PICK_IMAGE = 1;
+    private ProgressDialog detectionProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +46,21 @@ public class PhotoAddActivity extends AppCompatActivity {
 
         photoListView.setAdapter(photoAdapter);
 
+        //사진추가버튼클릭
         photoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                photoAdapter.addItem(new PhotoItem(R.drawable.map));
-                photoAdapter.notifyDataSetChanged();
+               // photoAdapter.addItem(new PhotoItem(R.drawable.map));
+               // photoAdapter.notifyDataSetChanged();
+                Intent gallIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                gallIntent.setType("image/*");
+                startActivityForResult(Intent.createChooser(gallIntent, "Select Picture"), PICK_IMAGE);
+
             }
         });
+
+        detectionProgressDialog = new ProgressDialog(this);
+
         //리스트에 항목 선택하면 이벤트 처리
         photoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,6 +115,23 @@ public class PhotoAddActivity extends AppCompatActivity {
             PhotoItem item = items.get(position);
             view.setImageView(item.getResId());
             return view;
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                //ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+                //imageView.setImageBitmap(bitmap);
+                //photoAdapter.addItem(new PhotoItem(bitmap.getGenerationId()));
+                photoAdapter.addItem(new PhotoItem(bitmap));
+                photoAdapter.notifyDataSetChanged();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
