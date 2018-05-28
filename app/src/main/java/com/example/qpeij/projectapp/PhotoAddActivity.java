@@ -29,7 +29,7 @@ public class PhotoAddActivity extends AppCompatActivity {
         photoListView=(GridView)findViewById(R.id.photoListView);
 
         photoAdapter = new PhotoAdapter();
-        photoAdapter.addItem(new PhotoItem(R.drawable.list));
+
         photoListView.setAdapter(photoAdapter);
 
         photoAdd.setOnClickListener(new View.OnClickListener() {
@@ -39,8 +39,14 @@ public class PhotoAddActivity extends AppCompatActivity {
                 photoAdapter.notifyDataSetChanged();
             }
         });
-
-
+        //리스트에 항목 선택하면 이벤트 처리
+        photoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //팝업창띄우기
+                //삭제/대표사진설정
+            }
+        });
     }
 
     class PhotoAdapter extends BaseAdapter{
