@@ -53,10 +53,14 @@ public class PhotoAddActivity extends AppCompatActivity {
                 pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        //인텐트
-                        int id = menuItem.getItemId();
-                        //if(id==R.id.add){}
 
+                        int id = menuItem.getItemId();
+                        if(id==R.id.setMain){
+                            //대표사진
+                        }
+                        else if(id==R.id.deletePhoto) {
+                            //삭제
+                        }
                         return PhotoAddActivity.super.onOptionsItemSelected(menuItem);
                     }
                 });
