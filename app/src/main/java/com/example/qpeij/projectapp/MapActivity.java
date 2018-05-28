@@ -15,10 +15,8 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
     }
 
-
-
     public void onClickedLocalBtn(View view) {
-        PopupMenu pop = new PopupMenu(this,view);
+        PopupMenu pop = new PopupMenu(getApplicationContext(),view);
         pop.getMenuInflater().inflate(R.menu.menu,pop.getMenu());
 
         pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

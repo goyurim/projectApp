@@ -1,7 +1,9 @@
 package com.example.qpeij.projectapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -9,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -44,7 +47,20 @@ public class PhotoAddActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //팝업창띄우기
-                //삭제/대표사진설정
+                PopupMenu pop = new PopupMenu(getApplicationContext(),view);
+                pop.getMenuInflater().inflate(R.menu.photo_menu,pop.getMenu());
+
+                pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        //인텐트
+                        int id = menuItem.getItemId();
+                        //if(id==R.id.add){}
+
+                        return PhotoAddActivity.super.onOptionsItemSelected(menuItem);
+                    }
+                });
+                pop.show();
             }
         });
     }
