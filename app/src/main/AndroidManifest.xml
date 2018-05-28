@@ -19,7 +19,8 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".TODOListActivity" />
         <activity android:name=".PhotoAddActivity" />
-        <activity android:name=".CheckBoxListActivity"></activity>
+        <activity android:name=".CheckBoxListActivity" />
+        <activity android:name=".PhotoItem"></activity>
     </application>
 
 </manifest>

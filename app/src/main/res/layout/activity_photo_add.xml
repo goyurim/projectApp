@@ -14,76 +14,18 @@
         android:textSize="50dp"
         android:layout_gravity="center"
         android:text="지역이름" />
+    <Button
+        android:id="@+id/photoAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진추가"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <GridLayout
+        <GridView
+            android:numColumns="2"
+            android:id="@+id/photoListView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:columnCount="2"
-            android:rowCount="5">
-            <Button
-                android:id="@+id/imageBtn1"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn2"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn3"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn4"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn5"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn6"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn7"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn8"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn9"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-            <Button
-                android:id="@+id/imageBtn10"
-                android:layout_width="180dp"
-                android:layout_height="200dp"
-                android:background="@drawable/back"
-                android:padding="0dp"/>
-        </GridLayout>
-    </ScrollView>
+            android:layout_height="match_parent"/>
+
+
 
 </LinearLayout>
