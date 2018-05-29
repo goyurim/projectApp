@@ -50,12 +50,14 @@ public class PhotoAddActivity extends AppCompatActivity {
         photoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // photoAdapter.addItem(new PhotoItem(R.drawable.map));
-               // photoAdapter.notifyDataSetChanged();
-                Intent gallIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                gallIntent.setType("image/*");
-                startActivityForResult(Intent.createChooser(gallIntent, "Select Picture"), PICK_IMAGE);
-
+                if(photoAdapter.getCount()<=10) {
+                    Intent gallIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                    gallIntent.setType("image/*");
+                    startActivityForResult(Intent.createChooser(gallIntent, "Select Picture"), PICK_IMAGE);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"사진은 10장만 추가가 가능합니다.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
