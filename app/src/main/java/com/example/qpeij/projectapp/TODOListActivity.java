@@ -58,9 +58,12 @@ public class TODOListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
                 Cursor cursor = (Cursor) mCursorAdapter.getItem(position);
+
+                String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
                 String index = cursor.getString(cursor.getColumnIndex("_id"));
                 int idd = Integer.parseInt(index);
 
+                intent.putExtra("title",title);
                 intent.putExtra("id",idd);
                 startActivityForResult(intent,0);
             }
