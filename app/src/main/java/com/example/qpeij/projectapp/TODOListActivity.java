@@ -1,23 +1,42 @@
 package com.example.qpeij.projectapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class TODOListActivity extends AppCompatActivity {
+    //db
+    ListDBHelper lDBHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
+    MyCursorAdapter mCursorAdapter;
+
     //코드 내용
+    final static String KEY_ID = "_id";
+    final static String KEY_TITLE = "title";
+    final static String TABLE_NAME = "listTable";
+
+    final static String querySelectAll = String.format("SELECT * FROM %s",TABLE_NAME);
     public static final int REQUEST_CHECKBOX = 100;
     ListView listView;
-    ListItemAdapter adapter;
+
     EditText ed_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,66 +44,72 @@ public class TODOListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todolist);
 
         listView = (ListView)findViewById(R.id.listview);
-        adapter = new ListItemAdapter();
+        lDBHelper = new ListDBHelper(this);
+        db = lDBHelper.getWritableDatabase();
 
-        adapter.addItem(new CheckListItem("title","달성도"));
-        adapter.addItem(new CheckListItem("title2", "달성도"));
-        adapter.addItem(new CheckListItem("title3", "달성도"));
+        cursor=db.rawQuery(querySelectAll,null);
+        mCursorAdapter = new MyCursorAdapter(this,cursor);
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(mCursorAdapter);
+
         ed_title = (EditText)findViewById(R.id.ed_listTitle);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                CheckListItem item = (CheckListItem)adapter.getItem(position);
-                Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
-                intent.putExtra("title",item.getTitle());
-                startActivityForResult(intent,REQUEST_CHECKBOX);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                CheckListItem item = (CheckListItem)adapter.getItem(position);
+//                Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
+//                intent.putExtra("title",item.getTitle());
+//                startActivityForResult(intent,REQUEST_CHECKBOX);
+//            }
+//        });
     }
 
     public void checklistCreateButton(View view) {
         String title = ed_title.getText().toString();
-        if(title.equals("")){
+        try{
+            String query = String.format("INSERT INTO %s VALUES(null,'%s');",TABLE_NAME, title);
+            db.execSQL(query);
+            // 아래 메서드를 실행하면 리스트가 갱신된다. 하지만 구글은 이 메서드를 deprecate한다. 고로 다른 방법으로 해보자.
+            // cursor.requery();
+            cursor = db.rawQuery( querySelectAll, null );
+            mCursorAdapter.changeCursor( cursor );
+        }catch (NullPointerException e){
             Toast.makeText(getApplicationContext(),"리스트 제목을 입력하시오.",Toast.LENGTH_LONG).show();
-        }else {
-            adapter.addItem(new CheckListItem(title, "달성도"));
-            adapter.notifyDataSetChanged();
-            ed_title.setText("");
         }
+        ed_title.setText("");
+//        InputMethodManager imm =
+//                (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
+//        imm.hideSoftInputFromWindow( ed_title.getWindowToken(), 0 );
     }
 
+    class MyCursorAdapter extends CursorAdapter
+    {
 
-    class ListItemAdapter extends BaseAdapter {
-        ArrayList<CheckListItem> items = new ArrayList<CheckListItem>();
-        @Override
-        public int getCount() {
-            return items.size();
-        }
-        public void addItem(CheckListItem item){
-            items.add(item);
-        }
-        @Override
-        public Object getItem(int position) {
-            return items.get(position);
+        @SuppressWarnings("deprecation")
+        public MyCursorAdapter(Context context, Cursor c) {
+            super(context, c);
         }
 
         @Override
-        public long getItemId(int position) {
-            return position;
+        public void bindView(View view, Context context, Cursor cursor) {
+            TextView tvTitle = (TextView) view.findViewById( R.id.tv_checklistTitle );
+
+            String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
+
+
+            Log.d("스트링 확인",  "" + title);
+
+            tvTitle.setText( title );
+
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-            CheckListItemView view = new CheckListItemView(getApplicationContext());
-            CheckListItem item = items.get(position);
-
-            view.setTitle(item.getTitle());
-            view.setGoal(item.getGoal());
-
-            return view;
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            LayoutInflater inflater = LayoutInflater.from( context );
+            View v = inflater.inflate( R.layout.checklist_item, parent, false );
+            return v;
         }
+
     }
 }

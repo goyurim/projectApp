@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class CheckListItemView extends LinearLayout{
     TextView checklistTitle;
-    TextView goal;
+
 
     public CheckListItemView(Context context) {
         super(context);
@@ -29,15 +29,12 @@ public class CheckListItemView extends LinearLayout{
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.checklist_item, this,true);
         checklistTitle = (TextView)findViewById(R.id.tv_checklistTitle);
-        goal = (TextView)findViewById(R.id.tv_goal);
+
     }
 
     public void setTitle(String checklistTitle) {
         this.checklistTitle.setText(checklistTitle);
     }
 
-    public void setGoal(String goal) {
-        this.goal.setText(goal);
-    }
 
 }
