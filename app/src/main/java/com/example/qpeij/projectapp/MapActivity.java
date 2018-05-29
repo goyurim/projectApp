@@ -25,12 +25,16 @@ public class MapActivity extends AppCompatActivity {
                 //인텐트
                 int id = menuItem.getItemId();
                 if(id==R.id.add){
-                    Intent intent2 = new Intent(getApplicationContext(), PhotoAddActivity.class);
-                    startActivity(intent2);
+                    Intent intent = new Intent(getApplicationContext(), PhotoAddActivity.class);
+                    startActivity(intent);
                 }
                 else if(id == R.id.write){
-                    Intent intent3 = new Intent(getApplicationContext(),DiaryActivity.class);
-                    startActivity(intent3);
+                    Intent intent = new Intent(getApplicationContext(),DiaryActivity.class);
+                    startActivity(intent);
+                }
+                else if(id==R.id.show){
+                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    startActivity(intent);
                 }
 
                 return MapActivity.super.onOptionsItemSelected(menuItem);
