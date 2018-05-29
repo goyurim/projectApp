@@ -28,6 +28,10 @@ public class MapActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(getApplicationContext(), PhotoAddActivity.class);
                     startActivity(intent2);
                 }
+                else if(id == R.id.write){
+                    Intent intent3 = new Intent(getApplicationContext(),DiaryActivity.class);
+                    startActivity(intent3);
+                }
 
                 return MapActivity.super.onOptionsItemSelected(menuItem);
             }

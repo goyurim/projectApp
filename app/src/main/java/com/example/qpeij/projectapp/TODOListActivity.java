@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class TODOListActivity extends AppCompatActivity {
+    //코드 내용
     public static final int REQUEST_CHECKBOX = 100;
     ListView listView;
     ListItemAdapter adapter;
