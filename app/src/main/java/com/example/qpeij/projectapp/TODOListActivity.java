@@ -34,7 +34,6 @@ public class TODOListActivity extends AppCompatActivity {
     final static String TABLE_NAME = "listTable";
 
     final static String querySelectAll = String.format("SELECT * FROM %s",TABLE_NAME);
-    public static final int REQUEST_CHECKBOX = 100;
     ListView listView;
 
     EditText ed_title;
@@ -54,15 +53,18 @@ public class TODOListActivity extends AppCompatActivity {
 
         ed_title = (EditText)findViewById(R.id.ed_listTitle);
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                CheckListItem item = (CheckListItem)adapter.getItem(position);
-//                Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
-//                intent.putExtra("title",item.getTitle());
-//                startActivityForResult(intent,REQUEST_CHECKBOX);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
+                Cursor cursor = (Cursor) mCursorAdapter.getItem(position);
+                String index = cursor.getString(cursor.getColumnIndex("_id"));
+                int idd = Integer.parseInt(index);
+
+                intent.putExtra("id",idd);
+                startActivityForResult(intent,0);
+            }
+        });
     }
 
     public void checklistCreateButton(View view) {
@@ -78,9 +80,9 @@ public class TODOListActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"리스트 제목을 입력하시오.",Toast.LENGTH_LONG).show();
         }
         ed_title.setText("");
-//        InputMethodManager imm =
-//                (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
-//        imm.hideSoftInputFromWindow( ed_title.getWindowToken(), 0 );
+        InputMethodManager imm =
+                (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
+        imm.hideSoftInputFromWindow( ed_title.getWindowToken(), 0 );
     }
 
     class MyCursorAdapter extends CursorAdapter
