@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 /**
  * Created by yoonc on 2018-05-28.
  */
@@ -31,7 +33,8 @@ public class PhotoItemView extends LinearLayout {
         photoView=(ImageView)findViewById(R.id.photoView);
 
     }
-    public void setImageView(Bitmap resId) {
-        photoView.setImageBitmap(resId);
+    public void setImageView(String resId) {
+        Glide.with(getContext()).load(resId).into(photoView);
+        //photoView.setImageBitmap(resId);
     }
 }

@@ -31,8 +31,11 @@ import android.provider.*;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -41,10 +44,12 @@ public class PhotoAddActivity extends AppCompatActivity {
     Button photoAdd;
     GridView photoListView;
     String LocalName;
+    PhotoItem photoItem;
     PhotoAdapter photoAdapter;
     private final int PICK_IMAGE = 1;
     FirebaseStorage storage;
     FirebaseDatabase database;
+    List<ImageDTO> imageDTOs= new ArrayList<>();
     private DatabaseReference mDatabase;
     private ProgressDialog detectionProgressDialog;
 
@@ -54,10 +59,11 @@ public class PhotoAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo_add);
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
-        mDatabase=database.getReference();
-        
+
+
         //지역명 받아올것
-        LocalName="경기도";
+        Intent intent=getIntent();
+        LocalName=getIntent().getStringExtra("local");
 
         //권한
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -73,7 +79,29 @@ public class PhotoAddActivity extends AppCompatActivity {
         photoAdd = (Button)findViewById(R.id.photoAdd);
         photoListView=(GridView)findViewById(R.id.photoListView);
         photoAdapter = new PhotoAdapter();
-        photoListView.setAdapter(photoAdapter);
+
+        database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                photoAdapter.clear();
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    photoItem = snapshot.getValue(PhotoItem.class);
+                    if(LocalName.equals(photoItem.getLocal())){
+                        photoAdapter.addItem(photoItem);
+                        photoListView.setAdapter(photoAdapter);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         //사진추가버튼클릭
         photoAdd.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +149,9 @@ public class PhotoAddActivity extends AppCompatActivity {
 }
     class PhotoAdapter extends BaseAdapter{
         ArrayList<PhotoItem> items = new ArrayList<PhotoItem>();
+        public void clear() {
+            items.clear();
+        }
         @Override
         public int getCount()  {
             return items.size();
@@ -154,13 +185,13 @@ public class PhotoAddActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
 
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                photoAdapter.addItem(new PhotoItem(bitmap));
+           // try {
+              //  Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                photoAdapter.addItem(new PhotoItem(getPath(uri)));
                 photoAdapter.notifyDataSetChanged();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //} catch (IOException e) {
+             //   e.printStackTrace();
+           // }
 
             upload(getPath(uri));
         }
