@@ -1,9 +1,11 @@
 package com.example.qpeij.projectapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,6 +35,8 @@ public class TODOListActivity extends AppCompatActivity {
     final static String TABLE_NAME = "listTable";
 
     final static String querySelectAll = String.format("SELECT * FROM %s",TABLE_NAME);
+
+    long posid;
     ListView listView;
 
     EditText ed_title;
@@ -56,18 +59,52 @@ public class TODOListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),CheckBoxListActivity.class);
+                Intent intent = new Intent(TODOListActivity.this, CheckBoxListActivity.class);
                 Cursor cursor = (Cursor) mCursorAdapter.getItem(position);
 
                 String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
-                String index = cursor.getString(cursor.getColumnIndex("_id"));
-                int idd = Integer.parseInt(index);
+                int index = cursor.getInt(cursor.getColumnIndex("_id"));
+
 
                 intent.putExtra("title",title);
-                intent.putExtra("id",idd);
+                intent.putExtra("id",index);
                 startActivityForResult(intent,0);
             }
         });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                posid = id;
+                showMessage();
+                return true;
+            }
+        });
+
+    }
+    private void showMessage(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("안내");
+        builder.setMessage("삭제하시겠습니까?");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        Log.d("Log","longClick");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                db.execSQL(String.format("DELETE FROM %s WHERE %s = %d", TABLE_NAME, KEY_ID , posid));
+                cursor = db.rawQuery( querySelectAll, null );
+                mCursorAdapter.changeCursor( cursor );
+            }
+        });
+        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                cursor = db.rawQuery( querySelectAll, null );
+                mCursorAdapter.changeCursor( cursor );
+            }
+        });
+        AlertDialog dialog=builder.create();
+        dialog.show();
     }
 
     public void checklistCreateButton(View view) {
@@ -88,25 +125,18 @@ public class TODOListActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow( ed_title.getWindowToken(), 0 );
     }
 
-    class MyCursorAdapter extends CursorAdapter
+    private class MyCursorAdapter extends CursorAdapter
     {
 
         @SuppressWarnings("deprecation")
-        public MyCursorAdapter(Context context, Cursor c) {
-            super(context, c);
-        }
+        public MyCursorAdapter(Context context, Cursor c) { super(context, c); }
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             TextView tvTitle = (TextView) view.findViewById( R.id.tv_checklistTitle );
-
             String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
-
-
             Log.d("스트링 확인",  "" + title);
-
             tvTitle.setText( title );
-
         }
 
         @Override
@@ -115,6 +145,5 @@ public class TODOListActivity extends AppCompatActivity {
             View v = inflater.inflate( R.layout.checklist_item, parent, false );
             return v;
         }
-
     }
 }
