@@ -22,12 +22,16 @@ public class CheckBoxListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_box_list);
+
+        //TODOList 화면에서 받음
         Intent intent = getIntent();
+        String title = intent.getStringExtra("title"); //리스트 제목
+        int id = intent.getIntExtra("id",0);//리스트 아이디값
 
         listView = (ListView) findViewById(R.id.checkboxlistview);
         adapter = new CheckboxItemAdapter();
         checklistTitle = (TextView)findViewById(R.id.checklistTitle);
-        checklistTitle.setText(intent.getExtras().getString("title"));
+        checklistTitle.setText(title);
         listView.setAdapter(adapter);
     }
 
