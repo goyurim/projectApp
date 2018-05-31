@@ -75,7 +75,7 @@ public class DiaryActivity extends AppCompatActivity {
         imageDTO.local=LocalName;
         imageDTO.title=title.getText().toString();
         imageDTO.contents=contents.getText().toString();
-
+        
         database.getReference().child("MapDB").push().setValue(imageDTO);
     }
 }
