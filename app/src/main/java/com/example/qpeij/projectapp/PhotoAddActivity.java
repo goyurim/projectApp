@@ -139,6 +139,9 @@ public class PhotoAddActivity extends AppCompatActivity {
                     }
                     else if(id==R.id.deletePhoto) {
                         //삭제
+
+                        //갱신
+                        photoAdapter.notifyDataSetChanged();
                     }
                     return PhotoAddActivity.super.onOptionsItemSelected(menuItem);
                 }
