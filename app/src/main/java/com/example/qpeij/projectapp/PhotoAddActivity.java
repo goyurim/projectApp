@@ -1,6 +1,8 @@
 package com.example.qpeij.projectapp;
 
+import android.Manifest;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -31,19 +33,26 @@ public class PhotoAddActivity extends AppCompatActivity {
     GridView photoListView;
     PhotoAdapter photoAdapter;
     private final int PICK_IMAGE = 1;
-    private ProgressDialog detectionProgressDialog;
+   // private ProgressDialog detectionProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_add);
 
+        //권한
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
+        }
+
         photoAdd = (Button)findViewById(R.id.photoAdd);
-
         photoListView=(GridView)findViewById(R.id.photoListView);
-
         photoAdapter = new PhotoAdapter();
+        photoListView.setAdapter(photoAdapter);
 
+        photoAdd = (Button)findViewById(R.id.photoAdd);
+        photoListView=(GridView)findViewById(R.id.photoListView);
+        photoAdapter = new PhotoAdapter();
         photoListView.setAdapter(photoAdapter);
 
         //사진추가버튼클릭
@@ -51,9 +60,14 @@ public class PhotoAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(photoAdapter.getCount()<=10) {
-                    Intent gallIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                   /* Intent gallIntent = new Intent(Intent.ACTION_GET_CONTENT);
                     gallIntent.setType("image/*");
                     startActivityForResult(Intent.createChooser(gallIntent, "Select Picture"), PICK_IMAGE);
+                    */
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+
+                    startActivityForResult(intent,PICK_IMAGE);
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"사진은 10장만 추가가 가능합니다.",Toast.LENGTH_SHORT).show();
@@ -61,7 +75,7 @@ public class PhotoAddActivity extends AppCompatActivity {
             }
         });
 
-        detectionProgressDialog = new ProgressDialog(this);
+        //detectionProgressDialog = new ProgressDialog(this);
 
         //리스트에 항목 선택하면 이벤트 처리
         photoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,7 +136,7 @@ public class PhotoAddActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        /*if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
@@ -134,6 +148,22 @@ public class PhotoAddActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }*/
+        if(requestCode==PICK_IMAGE){
+            //사진가져오기
+            //사진경로
+            System.out.println(getPath(data.getData()));
         }
+    }
+    public String getPath(Uri uri){
+        String [] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(this,uri,proj,null,null,null);
+
+        Cursor cursor = cursorLoader.loadInBackground();
+        int index= cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        return cursor.getString(index);
     }
 }
