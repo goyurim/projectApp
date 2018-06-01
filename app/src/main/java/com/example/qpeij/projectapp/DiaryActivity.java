@@ -20,6 +20,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DiaryActivity extends AppCompatActivity {
     String LocalName;
@@ -27,6 +29,7 @@ public class DiaryActivity extends AppCompatActivity {
     FirebaseStorage storage;
     FirebaseDatabase database;
     MemoDTO memoDTO;
+    String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,6 @@ public class DiaryActivity extends AppCompatActivity {
                         contents.setText(memoDTO.contents);
                     }
                 }
-
             }
 
             @Override
@@ -62,7 +64,6 @@ public class DiaryActivity extends AppCompatActivity {
         });
 
     }
-
     public void datePickButton(View view) {
 
     }
@@ -77,7 +78,16 @@ public class DiaryActivity extends AppCompatActivity {
         memoDTO.local=LocalName;
         memoDTO.title=title.getText().toString();
         memoDTO.contents=contents.getText().toString();
-        
+       // key= database.getReference().child("MapDB").push().getKey();
         database.getReference().child("MapDB").push().setValue(memoDTO);
+
+
+        //////
+       // Map<String, Object> childUpdates = new HashMap<>();
+        //childUpdates.put("/MapDB/" + key, memoDTO);
+
+
+       // database.getReference().push().updateChildren(childUpdates);
+
     }
 }
