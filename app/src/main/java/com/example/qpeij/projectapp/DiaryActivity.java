@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,6 +27,7 @@ import java.util.Map;
 
 public class DiaryActivity extends AppCompatActivity {
     String LocalName;
+    TextView local;
     EditText title, contents;
     FirebaseStorage storage;
     FirebaseDatabase database;
@@ -42,6 +44,7 @@ public class DiaryActivity extends AppCompatActivity {
         LocalName=intent.getStringExtra("local");
         title=(EditText)findViewById(R.id.title);
         contents=(EditText)findViewById(R.id.contents);
+        local.setText(LocalName);
 
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
