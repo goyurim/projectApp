@@ -35,6 +35,13 @@
             android:textSize="20dp"
             android:text="작성완료"
             android:onClick="diaryWriteButton"/>
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="지우기"
+            android:onClick="clearButton"/>
         <!--캘린더 불러오는 기능 구현 필요.-->
         <ImageButton
             android:id="@+id/calendar"

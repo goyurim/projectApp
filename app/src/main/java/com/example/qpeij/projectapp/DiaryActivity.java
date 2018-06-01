@@ -92,4 +92,9 @@ public class DiaryActivity extends AppCompatActivity {
        // database.getReference().push().updateChildren(childUpdates);
 
     }
+
+    public void clearButton(View view) {
+        title.setText("");
+        contents.setText("");
+    }
 }
