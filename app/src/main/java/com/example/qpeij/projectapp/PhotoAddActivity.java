@@ -50,8 +50,6 @@ public class PhotoAddActivity extends AppCompatActivity {
     private final int PICK_IMAGE = 1;
     FirebaseStorage storage;
     FirebaseDatabase database;
-    List<ImageDTO> imageDTOs= new ArrayList<>();
-    private DatabaseReference mDatabase;
     private ProgressDialog detectionProgressDialog;
 
     @Override
@@ -214,28 +212,28 @@ public class PhotoAddActivity extends AppCompatActivity {
         return cursor.getString(index);
     }
     private void upload(String uri){
-        StorageReference storageRef = storage.getReference();
+            StorageReference storageRef = storage.getReference();
 
-        Uri file = Uri.fromFile(new File(uri));
-        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-        UploadTask uploadTask = riversRef.putFile(file);
+            Uri file = Uri.fromFile(new File(uri));
+            StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+            UploadTask uploadTask = riversRef.putFile(file);
 
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
-                ImageDTO imageDTO = new ImageDTO();
-                imageDTO.local=LocalName;
-                imageDTO.image =(downloadUrl.toString());
+                    ImageDTO imageDTO = new ImageDTO();
+                    imageDTO.local=LocalName;
+                    imageDTO.image =(downloadUrl.toString());
 
-                database.getReference().child("MapDB").push().setValue(imageDTO);
-            }
-        });
+                    database.getReference().child("MapDB").push().setValue(imageDTO);
+                }
+            });
     }
 }
