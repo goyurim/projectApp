@@ -42,6 +42,7 @@ import com.google.firebase.storage.UploadTask;
 
 public class PhotoAddActivity extends AppCompatActivity {
     Button photoAdd;
+    TextView textView;
     GridView photoListView;
     String LocalName;
     PhotoItem photoItem;
@@ -59,11 +60,13 @@ public class PhotoAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo_add);
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
-
+        textView=(TextView)findViewById(R.id.textView);
 
         //지역명 받아올것
         Intent intent=getIntent();
         LocalName=getIntent().getStringExtra("local");
+        textView.setText(LocalName);
+
 
         //권한
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
