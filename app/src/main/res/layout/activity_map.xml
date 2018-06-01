@@ -9,13 +9,7 @@
     tools:context="com.example.qpeij.projectapp.MapActivity">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickedLocalBtn"
-        android:background="@null"
-        android:text="dd" />
-
-    <Button
+        android:onClick="onClickedLocalBtn1"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
@@ -32,6 +26,7 @@
         app:layout_constraintVertical_bias="0.227" />
 
     <Button
+        android:onClick="onClickedLocalBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -48,6 +43,7 @@
         app:layout_constraintVertical_bias="0.031" />
 
     <Button
+        android:onClick="onClickedLocalBtn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -64,6 +60,7 @@
         app:layout_constraintVertical_bias="0.476" />
 
     <Button
+        android:onClick="onClickedLocalBtn4"
         android:layout_width="88dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
@@ -80,6 +77,7 @@
         app:layout_constraintVertical_bias="0.605" />
 
     <Button
+        android:onClick="onClickedLocalBtn5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="136dp"
@@ -97,6 +95,7 @@
 
 
     <Button
+        android:onClick="onClickedLocalBtn6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
