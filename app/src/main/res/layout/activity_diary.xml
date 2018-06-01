@@ -37,6 +37,7 @@
             android:onClick="diaryWriteButton"/>
         <!--캘린더 불러오는 기능 구현 필요.-->
         <ImageButton
+            android:id="@+id/calendar"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/calendar"
