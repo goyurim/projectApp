@@ -36,7 +36,7 @@ public class MapActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(id==R.id.show){
-                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),Show2Activity.class);
                     intent.putExtra("local","강원도");
                     startActivity(intent);
                 }
@@ -67,7 +67,7 @@ public class MapActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(id==R.id.show){
-                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),Show2Activity.class);
                     intent.putExtra("local","경기도");
                     startActivity(intent);
                 }
@@ -98,7 +98,7 @@ public class MapActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(id==R.id.show){
-                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),Show2Activity.class);
                     intent.putExtra("local","충청도");
                     startActivity(intent);
                 }
@@ -129,7 +129,7 @@ public class MapActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(id==R.id.show){
-                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),Show2Activity.class);
                     intent.putExtra("local","경상도");
                     startActivity(intent);
                 }
@@ -160,7 +160,7 @@ public class MapActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(id==R.id.show){
-                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),Show2Activity.class);
                     intent.putExtra("local","전라도");
                     startActivity(intent);
                 }
@@ -191,7 +191,7 @@ public class MapActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(id==R.id.show){
-                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),Show2Activity.class);
                     intent.putExtra("local","제주도");
                     startActivity(intent);
                 }
