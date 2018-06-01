@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,7 +26,7 @@ public class DiaryActivity extends AppCompatActivity {
     EditText title, contents;
     FirebaseStorage storage;
     FirebaseDatabase database;
-    ImageDTO imageDTO;
+    MemoDTO memoDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,10 @@ public class DiaryActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    imageDTO = snapshot.getValue(ImageDTO.class);
-                    if(LocalName.equals(imageDTO.local)){
-                        title.setText(imageDTO.title);
-                        contents.setText(imageDTO.contents);
+                    memoDTO = snapshot.getValue(MemoDTO.class);
+                    if(LocalName.equals(memoDTO.local)){
+                        title.setText(memoDTO.title);
+                        contents.setText(memoDTO.contents);
                     }
                 }
 
@@ -68,14 +69,15 @@ public class DiaryActivity extends AppCompatActivity {
 
     public void diaryWriteButton(View view) {
         upload();
+        Toast.makeText(getApplicationContext(),"작성되었습니다.",Toast.LENGTH_LONG).show();
     }
     private void upload() {
 
-        ImageDTO imageDTO = new ImageDTO();
-        imageDTO.local=LocalName;
-        imageDTO.title=title.getText().toString();
-        imageDTO.contents=contents.getText().toString();
+        MemoDTO memoDTO = new MemoDTO();
+        memoDTO.local=LocalName;
+        memoDTO.title=title.getText().toString();
+        memoDTO.contents=contents.getText().toString();
         
-        database.getReference().child("MapDB").push().setValue(imageDTO);
+        database.getReference().child("MapDB").push().setValue(memoDTO);
     }
 }

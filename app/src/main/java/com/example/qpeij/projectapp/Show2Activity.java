@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Show2Activity extends AppCompatActivity {
     TextView local, title, contents;
     String LocalName;
-    ImageDTO imageDTO;
+    MemoDTO memoDTO;
     FirebaseDatabase database;
     FirebaseStorage storage;
     PhotoItem photoItem;
@@ -44,22 +44,31 @@ public class Show2Activity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         gridView=(GridView)findViewById(R.id.gridView);
 
+        //지역명 가져옴
         Intent intent=getIntent();
         LocalName = intent.getStringExtra("local");
         local.setText(LocalName);
+
+        showAdapter = new PhotoAdapter();
+        gridView.setAdapter(showAdapter);
 
         //내용보기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                showAdapter.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    imageDTO = snapshot.getValue(ImageDTO.class);
-                    if(LocalName.equals(imageDTO.local)){
-                        title.setText(imageDTO.title);
-                        contents.setText(imageDTO.contents);
+                    memoDTO = snapshot.getValue(MemoDTO.class);
+                    photoItem = snapshot.getValue(PhotoItem.class);
+                    if(LocalName.equals(memoDTO.local)){
+                        title.setText(memoDTO.title);
+                        contents.setText(memoDTO.contents);
                     }
-
+                    if(LocalName.equals(photoItem.getLocal())){
+                        showAdapter.addItem(photoItem);
+                        gridView.setAdapter(showAdapter);
+                    }
                 }
             }
             @Override
