@@ -59,7 +59,7 @@ public class TODOListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(TODOListActivity.this, CheckBoxListActivity.class);
+                Intent intent = new Intent(TODOListActivity.this, CheckBoxList2Activity.class);
                 Cursor cursor = (Cursor) mCursorAdapter.getItem(position);
 
                 String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));

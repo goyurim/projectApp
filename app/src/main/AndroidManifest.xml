@@ -26,7 +26,8 @@
         <activity android:name=".CheckBoxListActivity" />
         <activity android:name=".PhotoItem" />
         <activity android:name=".DiaryActivity" />
-        <activity android:name=".Show2Activity"></activity>
+        <activity android:name=".Show2Activity" />
+        <activity android:name=".CheckBoxList2Activity"></activity>
     </application>
 
 </manifest>
