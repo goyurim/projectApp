@@ -23,6 +23,13 @@
         android:textSize="35sp"
         android:text="제목"/>
     <TextView
+        android:id="@+id/dateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="날짜"
+        android:gravity="left"
+        android:textSize="15dp"/>
+    <TextView
         android:id="@+id/contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

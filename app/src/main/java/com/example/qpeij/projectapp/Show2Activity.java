@@ -20,7 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 
 public class Show2Activity extends AppCompatActivity {
-    TextView local, title, contents;
+    TextView local, title, contents,dateText;
     String LocalName;
     MemoDTO memoDTO;
     FirebaseDatabase database;
@@ -43,6 +43,7 @@ public class Show2Activity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
         gridView=(GridView)findViewById(R.id.gridView);
+        dateText=(TextView)findViewById(R.id.dateText);
 
         //지역명 가져옴
         Intent intent=getIntent();
@@ -64,6 +65,7 @@ public class Show2Activity extends AppCompatActivity {
                     if(LocalName.equals(memoDTO.local)){
                         title.setText(memoDTO.title);
                         contents.setText(memoDTO.contents);
+                        dateText.setText(memoDTO.date);
                     }
                     if(LocalName.equals(photoItem.getLocal())){
                         showAdapter.addItem(photoItem);

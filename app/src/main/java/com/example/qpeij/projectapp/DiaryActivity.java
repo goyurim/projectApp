@@ -1,11 +1,13 @@
 package com.example.qpeij.projectapp;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +24,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DiaryActivity extends AppCompatActivity {
     String LocalName;
-    TextView local;
+    String date_selected;
+    TextView local,text;
     EditText title, contents;
     FirebaseStorage storage;
     FirebaseDatabase database;
@@ -46,10 +50,11 @@ public class DiaryActivity extends AppCompatActivity {
         contents=(EditText)findViewById(R.id.contents);
         local=(TextView)findViewById(R.id.textView);
         local.setText(LocalName);
-
+        text = (TextView)findViewById(R.id.dateText);
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
 
+        //가져오기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,6 +63,8 @@ public class DiaryActivity extends AppCompatActivity {
                     memoDTO = snapshot.getValue(MemoDTO.class);
                     if(LocalName.equals(memoDTO.local)){
                         title.setText(memoDTO.title);
+                        date_selected=memoDTO.date;
+                        text.setText(date_selected);
                         contents.setText(memoDTO.contents);
                     }
                 }
@@ -71,7 +78,21 @@ public class DiaryActivity extends AppCompatActivity {
 
     }
     public void datePickButton(View view) {
+        Calendar c = Calendar.getInstance();
+        int cYear = c.get(Calendar.YEAR);
+        int cMonth = c.get(Calendar.MONTH);
+        int cDay = c.get(Calendar.DAY_OF_MONTH);
 
+        DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                date_selected = String.valueOf(year)+" / "+String.valueOf(month+1)+" / "+String.valueOf(dayOfMonth);
+
+                text.setText(date_selected);
+            }
+        };
+        DatePickerDialog alert = new DatePickerDialog(this, mDateSetListener, cYear,cMonth,cDay);
+        alert.show();
     }
 
     public void diaryWriteButton(View view) {
@@ -83,6 +104,7 @@ public class DiaryActivity extends AppCompatActivity {
         MemoDTO memoDTO = new MemoDTO();
         memoDTO.local=LocalName;
         memoDTO.title=title.getText().toString();
+        memoDTO.date=date_selected;
         memoDTO.contents=contents.getText().toString();
         mReference= database.getReference().child("MapDB");
         mReference.push().setValue(memoDTO);
