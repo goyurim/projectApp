@@ -52,6 +52,7 @@ public class PhotoAddActivity extends AppCompatActivity {
     FirebaseStorage storage;
     FirebaseDatabase database;
     private ProgressDialog detectionProgressDialog;
+    private List<String> uidLists = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +87,17 @@ public class PhotoAddActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                uidLists.clear();
                 photoAdapter.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     photoItem = snapshot.getValue(PhotoItem.class);
+                    String uidKey = snapshot.getKey();
                     if(LocalName.equals(photoItem.getLocal())){
+
                         photoAdapter.addItem(photoItem);
                         photoListView.setAdapter(photoAdapter);
+                        uidLists.add(uidKey);
+
                     }
                 }
 
@@ -126,7 +132,7 @@ public class PhotoAddActivity extends AppCompatActivity {
         //리스트에 항목 선택하면 이벤트 처리
         photoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
             //팝업창띄우기
             PopupMenu pop = new PopupMenu(getApplicationContext(),view);
             pop.getMenuInflater().inflate(R.menu.photo_menu,pop.getMenu());
@@ -141,7 +147,7 @@ public class PhotoAddActivity extends AppCompatActivity {
                     }
                     else if(id==R.id.deletePhoto) {
                         //삭제
-
+                        delete_content(position);
                         //갱신
                         photoAdapter.notifyDataSetChanged();
                     }
@@ -152,6 +158,34 @@ public class PhotoAddActivity extends AppCompatActivity {
         }
     });
 }
+    private void delete_content(final int position){
+        //storage.getReference().child("MapDB").child(uidLists.get(position)).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+           // @Override
+           // public void onSuccess(Void aVoid) {
+
+                database.getReference().child("MapDB").child(uidLists.get(position)).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        Toast.makeText(getApplicationContext(), "삭제가 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+                        photoAdapter.notifyDataSetChanged();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "삭제 실패", Toast.LENGTH_SHORT).show();
+                    }
+                });
+           // }
+       // }).addOnFailureListener(new OnFailureListener() {
+        //    @Override
+         //   public void onFailure(@NonNull Exception e) {
+          //
+
+         //   }
+       // });
+
+    }
     class PhotoAdapter extends BaseAdapter{
         ArrayList<PhotoItem> items = new ArrayList<PhotoItem>();
         public void clear() {
@@ -161,7 +195,6 @@ public class PhotoAddActivity extends AppCompatActivity {
         public int getCount()  {
             return items.size();
         }
-
         @Override
         public Object getItem(int position)  {
             return items.get(position);

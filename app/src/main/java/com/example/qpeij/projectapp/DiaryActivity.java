@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -28,6 +29,7 @@ public class DiaryActivity extends AppCompatActivity {
     EditText title, contents;
     FirebaseStorage storage;
     FirebaseDatabase database;
+    private DatabaseReference mReference;
     MemoDTO memoDTO;
     String key;
 
@@ -78,8 +80,8 @@ public class DiaryActivity extends AppCompatActivity {
         memoDTO.local=LocalName;
         memoDTO.title=title.getText().toString();
         memoDTO.contents=contents.getText().toString();
-       // key= database.getReference().child("MapDB").push().getKey();
-        database.getReference().child("MapDB").push().setValue(memoDTO);
+        mReference= database.getReference().child("MapDB");
+        mReference.push().setValue(memoDTO);
 
 
         //////
