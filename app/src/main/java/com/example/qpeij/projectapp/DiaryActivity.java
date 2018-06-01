@@ -44,6 +44,7 @@ public class DiaryActivity extends AppCompatActivity {
         LocalName=intent.getStringExtra("local");
         title=(EditText)findViewById(R.id.title);
         contents=(EditText)findViewById(R.id.contents);
+        local=(TextView)findViewById(R.id.textView);
         local.setText(LocalName);
 
         storage=FirebaseStorage.getInstance();
