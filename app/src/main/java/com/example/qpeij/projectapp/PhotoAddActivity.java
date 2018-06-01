@@ -31,6 +31,7 @@ import android.provider.*;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -189,8 +190,6 @@ public class PhotoAddActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
 
-           // try {
-              //  Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 photoAdapter.addItem(new PhotoItem(getPath(uri)));
                 photoAdapter.notifyDataSetChanged();
             //} catch (IOException e) {
