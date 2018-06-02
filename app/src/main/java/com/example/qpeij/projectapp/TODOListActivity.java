@@ -20,6 +20,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class TODOListActivity extends AppCompatActivity {
@@ -28,6 +33,9 @@ public class TODOListActivity extends AppCompatActivity {
     SQLiteDatabase db;
     Cursor cursor;
     MyCursorAdapter mCursorAdapter;
+
+    //달성도를 위한 파이어베이스 디비
+    FirebaseDatabase database;
 
     //코드 내용
     final static String KEY_ID = "_id";
@@ -63,11 +71,12 @@ public class TODOListActivity extends AppCompatActivity {
                 Cursor cursor = (Cursor) mCursorAdapter.getItem(position);
 
                 String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
-                int index = cursor.getInt(cursor.getColumnIndex("_id"));
-
+                //int index = cursor.getInt(cursor.getColumnIndex("_id"));
+                int pos = position;
 
                 intent.putExtra("title",title);
-                intent.putExtra("id",index);
+                intent.putExtra("positionValue",pos);
+                //intent.putExtra("id",index);
                 startActivityForResult(intent,0);
             }
         });

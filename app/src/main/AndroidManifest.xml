@@ -23,7 +23,6 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".TODOListActivity" />
         <activity android:name=".PhotoAddActivity" />
-        <activity android:name=".CheckBoxListActivity" />
         <activity android:name=".PhotoItem" />
         <activity android:name=".DiaryActivity" />
         <activity android:name=".Show2Activity" />

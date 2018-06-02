@@ -7,6 +7,8 @@
     <TextView
         android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:id="@+id/checkboxContent"/>
+        android:gravity="center_vertical"
+        android:id="@+id/checkboxContent"
+        android:text="예제"/>
 
 </LinearLayout>

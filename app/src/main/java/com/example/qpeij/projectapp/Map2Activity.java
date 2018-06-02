@@ -1,6 +1,7 @@
 package com.example.qpeij.projectapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,12 +14,6 @@ public class Map2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map2);
-    }
-
-    public void onClickedVersionBtn2(View view) {
-        Intent intent=new Intent(getApplicationContext(),MapActivity.class);
-        startActivityForResult(intent,11);
-        finish();
     }
 
     public void onClickedBtn1(View view) {
@@ -62,5 +57,31 @@ public class Map2Activity extends AppCompatActivity {
         Intent intent =  new Intent(getApplicationContext(),SiteActivity.class);
         intent.putExtra("key","여수");
         startActivity(intent);
+    }
+
+    public void showMoreOnClickButton(View view) {
+        PopupMenu pop = new PopupMenu(getApplicationContext(),view);
+        pop.getMenuInflater().inflate(R.menu.train_menu,pop.getMenu());
+
+        pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                //인텐트
+                int id = menuItem.getItemId();
+                if(id==R.id.toGoMapPage){
+                    Intent intent=new Intent(getApplicationContext(),MapActivity.class);
+                    startActivityForResult(intent,11);
+                    finish();
+                }
+                else if(id == R.id.korailPage){
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.letskorail.com/ebizprd/prdMain.do"));
+                    startActivity(intent);
+                    finish();
+                }
+                return Map2Activity.super.onOptionsItemSelected(menuItem);
+            }
+        });
+        pop.show();
+
     }
 }

@@ -46,6 +46,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     //int id;//아이디 값
     int position;
     int count = 0;
+    int listPositionNum;
     boolean checked = false;
     private List<String> uidLists = new ArrayList<>();
     private List<Boolean> isChecked = new ArrayList<>();
@@ -69,6 +70,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("title"); //리스트 제목
         //id = intent.getIntExtra("id",0);//리스트 아이디값
+        listPositionNum = intent.getIntExtra("positionValue",0);
         listView = (ListView) findViewById(R.id.checkboxlistview);
         ed_cbItem=(EditText)findViewById(R.id.ed_checkboxItem) ;
         storage=FirebaseStorage.getInstance();
@@ -122,14 +124,18 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                     isChecked.set(position,true);
                     update(position,true);
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    count++;
+                    count +=1;
+                    //counts.set(listPositionNum, count);
+
                 }else if(checked==true){
 
                     isChecked.set(position,false);
                     update(position,false);
                     tv.setPaintFlags(0);
-                    count--;
+                    count -=1;
+                    //counts.set(listPositionNum,count);
                 }
+                //Log.d("Count","Count 갯수 : "+counts.get(listPositionNum));
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -213,22 +219,15 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-//            int all = getCount();
+
             CheckBoxItemView view = new CheckBoxItemView(getApplicationContext());
-            //TextView tv = (TextView) findViewById(R.id.tv_goal);
             TextView textView = (TextView)view.checkboxItem;
-//            int goal = (count/all)*100;
-//            tv.setText(""+goal);
 
             CheckBoxItem item = items.get(position);
+
+            //여기서 오류 발생
             Boolean checked=isChecked.get(position);
-            /*if(각 items의 checked부분의 불린 값이 true이면 밑줄 false 밑줄 아닌 조건문 생성){
-                .setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            }
-            else{
-                .setPaintFlags(0);
-            }
-            */
+
             if(checked == false){
                 //체크가 안되있다면.
                 Log.d("checked",checked+"");
