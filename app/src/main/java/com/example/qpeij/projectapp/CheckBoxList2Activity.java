@@ -215,14 +215,22 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             items.add(item);
         }
         @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            int all = getCount();
-            CheckBoxItemView  view = new CheckBoxItemView(getApplicationContext());
+        public View getView(int position, View convertView, ViewGroup parent) {
+//            int all = getCount();
+            CheckBoxItemView view = new CheckBoxItemView(getApplicationContext());
 //            TextView tv = (TextView) findViewById(R.id.tv_goal);
 //            int goal = (count/all)*100;
 //            tv.setText(""+goal);
+
             CheckBoxItem item = items.get(position);
+            /*if(각 items의 checked부분의 불린 값이 true이면 밑줄 false 밑줄 아닌 조건문 생성){
+                .setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            else{
+                .setPaintFlags(0);
+            }
+            */
+
             view.setContent(item.getContent());
             return view;
         }
