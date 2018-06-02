@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -76,6 +77,8 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         //리스트 뷰 지정
         adapter=new CheckBoxListAdapter();
         listView.setAdapter(adapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -105,7 +108,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                 position = i;
                 showMessage();
                 return true;
-
             }
         });
     }
@@ -193,7 +195,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             items.add(item);
         }
         @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup)
+        public View getView(int position, View convertView, ViewGroup parent)
         {
             CheckBoxItemView  view = new CheckBoxItemView(getApplicationContext());
 
