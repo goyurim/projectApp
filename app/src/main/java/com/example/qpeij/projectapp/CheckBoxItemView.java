@@ -28,6 +28,7 @@ public class CheckBoxItemView extends LinearLayout{
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.checkbox_item, this,true);
         checkboxItem = (TextView)findViewById(R.id.checkboxContent);
+        
     }
     public void setContent(String checkboxItem) {
         this.checkboxItem.setText(checkboxItem);

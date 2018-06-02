@@ -114,17 +114,21 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
                 TextView tv = (TextView)view.findViewById(R.id.checkboxContent);
                 checked=isChecked.get(position);
+                //tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 Log.d("보냄",position+"");
                 if(checked == false){
                     //체크가 안되있다면.
-                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    Log.d("checked",checked+"");
+
                     isChecked.set(position,true);
                     update(position,true);
+                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     count++;
                 }else if(checked==true){
-                    tv.setPaintFlags(0);
+
                     isChecked.set(position,false);
                     update(position,false);
+                    tv.setPaintFlags(0);
                     count--;
                 }
             }
