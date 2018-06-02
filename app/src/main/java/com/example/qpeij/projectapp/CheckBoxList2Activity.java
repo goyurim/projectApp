@@ -216,11 +216,13 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 //            int all = getCount();
             CheckBoxItemView view = new CheckBoxItemView(getApplicationContext());
-//            TextView tv = (TextView) findViewById(R.id.tv_goal);
+            //TextView tv = (TextView) findViewById(R.id.tv_goal);
+            TextView textView = (TextView)view.checkboxItem;
 //            int goal = (count/all)*100;
 //            tv.setText(""+goal);
 
             CheckBoxItem item = items.get(position);
+            Boolean checked=isChecked.get(position);
             /*if(각 items의 checked부분의 불린 값이 true이면 밑줄 false 밑줄 아닌 조건문 생성){
                 .setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
@@ -228,6 +230,14 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                 .setPaintFlags(0);
             }
             */
+            if(checked == false){
+                //체크가 안되있다면.
+                Log.d("checked",checked+"");
+                textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }else if(checked==true){
+
+                textView.setPaintFlags(0);
+            }
 
             view.setContent(item.getContent());
             return view;
