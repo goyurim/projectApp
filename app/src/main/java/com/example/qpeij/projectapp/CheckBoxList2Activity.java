@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -44,6 +45,8 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     TextView checklistTitle;//체크박스 리스트 이름
     //int id;//아이디 값
     int position;
+    int count = 0;
+    boolean checked = false;
     private List<String> uidLists = new ArrayList<>();
     String title;
     CheckBoxListAdapter adapter;
@@ -99,7 +102,24 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
             }
         });
+        //클릭시 취소 선 생성
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tv = (TextView)view.findViewById(R.id.checkboxContent);
+                if(checked == false){
+                    //체크가 안되있다면.
+                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    checked = true;
+                    count++;
+                }else{
+                    tv.setPaintFlags(0);
+                    count--;
+                }
 
+                count++;
+            }
+        });
         //길게누르면 -안됨 왠지 모름**
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -197,8 +217,11 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
+            int all = getCount();
             CheckBoxItemView  view = new CheckBoxItemView(getApplicationContext());
-
+//            TextView tv = (TextView) findViewById(R.id.tv_goal);
+//            int goal = (count/all)*100;
+//            tv.setText(""+goal);
             CheckBoxItem item = items.get(position);
             view.setContent(item.getContent());
             return view;
