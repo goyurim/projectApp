@@ -109,14 +109,6 @@ public class DiaryActivity extends AppCompatActivity {
         mReference= database.getReference().child("MapDB");
         mReference.push().setValue(memoDTO);
 
-
-        //////
-       // Map<String, Object> childUpdates = new HashMap<>();
-        //childUpdates.put("/MapDB/" + key, memoDTO);
-
-
-       // database.getReference().push().updateChildren(childUpdates);
-
     }
 
     public void clearButton(View view) {

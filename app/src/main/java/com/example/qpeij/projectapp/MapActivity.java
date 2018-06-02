@@ -15,7 +15,11 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
     }
-
+    public void onClickedVersionBtn(View view) {
+        Intent intent=new Intent(getApplicationContext(),Map2Activity.class);
+        startActivityForResult(intent,10);
+        finish();
+    }
     public void onClickedLocalBtn1(View view) {
         String areaName = "강원도";
         onClick(view,areaName);
@@ -70,4 +74,6 @@ public class MapActivity extends AppCompatActivity {
         });
         pop.show();
     }
+
+
 }

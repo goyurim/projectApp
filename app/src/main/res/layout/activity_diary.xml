@@ -69,15 +69,7 @@
             android:textSize="20dp"
             android:text="지우기"
             android:onClick="clearButton"/>
-        <!--캘린더 불러오는 기능 구현 필요.-->
-        <ImageButton
-            android:id="@+id/calendar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/calendar"
-            android:layout_margin="10dp"
-            android:onClick="datePickButton"
-            />
+
     </LinearLayout>
 
 </LinearLayout>

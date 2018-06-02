@@ -27,7 +27,9 @@
         <activity android:name=".PhotoItem" />
         <activity android:name=".DiaryActivity" />
         <activity android:name=".Show2Activity" />
-        <activity android:name=".CheckBoxList2Activity"></activity>
+        <activity android:name=".CheckBoxList2Activity" />
+        <activity android:name=".Map2Activity" />
+        <activity android:name=".SiteActivity"></activity>
     </application>
 
 </manifest>

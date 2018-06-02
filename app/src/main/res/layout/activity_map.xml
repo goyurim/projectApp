@@ -5,8 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/map_image"
-    android:orientation="vertical"
     tools:context="com.example.qpeij.projectapp.MapActivity">
+
+    <Button
+        android:onClick="onClickedVersionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="기차역"
+        />
 
     <Button
         android:onClick="onClickedLocalBtn1"
@@ -17,6 +23,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
+        android:textSize="20sp"
         android:text="강원도"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +41,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="140dp"
         android:background="@null"
+        android:textSize="20sp"
         android:text="경기도"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +59,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
+        android:textSize="20sp"
         android:text="충청도"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +77,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
+        android:textSize="20sp"
         android:text="경상도"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +95,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
+        android:textSize="20sp"
         android:text="전라도"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +112,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@null"
+        android:textSize="20sp"
         android:text="제주도"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
