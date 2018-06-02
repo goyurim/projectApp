@@ -111,7 +111,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 TextView tv = (TextView)view.findViewById(R.id.checkboxContent);
                 checked=isChecked.get(position);
                 Log.d("보냄",position+"");
