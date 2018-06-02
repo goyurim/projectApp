@@ -109,8 +109,6 @@ public class PhotoAddActivity extends AppCompatActivity {
             }
         });
 
-
-
         //사진추가버튼클릭
         photoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,10 +157,6 @@ public class PhotoAddActivity extends AppCompatActivity {
     });
 }
     private void delete_content(final int position){
-        //storage.getReference().child("MapDB").child(uidLists.get(position)).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-           // @Override
-           // public void onSuccess(Void aVoid) {
-
                 database.getReference().child("MapDB").child(uidLists.get(position)).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -176,15 +170,6 @@ public class PhotoAddActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "삭제 실패", Toast.LENGTH_SHORT).show();
                     }
                 });
-           // }
-       // }).addOnFailureListener(new OnFailureListener() {
-        //    @Override
-         //   public void onFailure(@NonNull Exception e) {
-          //
-
-         //   }
-       // });
-
     }
     class PhotoAdapter extends BaseAdapter{
         ArrayList<PhotoItem> items = new ArrayList<PhotoItem>();

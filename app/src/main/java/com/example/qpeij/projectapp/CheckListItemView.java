@@ -29,7 +29,6 @@ public class CheckListItemView extends LinearLayout{
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.checklist_item, this,true);
         checklistTitle = (TextView)findViewById(R.id.tv_checklistTitle);
-
     }
 
     public void setTitle(String checklistTitle) {

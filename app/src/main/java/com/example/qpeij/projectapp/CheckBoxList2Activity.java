@@ -48,6 +48,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     int count = 0;
     boolean checked = false;
     private List<String> uidLists = new ArrayList<>();
+    private List<Boolean> isChecked = new ArrayList<>();
     String title;
     CheckBoxListAdapter adapter;
     CheckBoxItem checkBoxItem;
@@ -82,49 +83,55 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
+        //data꺼내기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                uidLists.clear();
+                isChecked.clear();
                 adapter.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     checkBoxItem = snapshot.getValue(CheckBoxItem.class);
+                    String uidKey = snapshot.getKey();
                     if(title.equals(checkBoxItem.getTitle())){
                         adapter.addItem(checkBoxItem);
                         listView.setAdapter(adapter);
+                        uidLists.add(uidKey);
+                       // checked=checkBoxItem.isChecked;
+                        isChecked.add(checkBoxItem.isChecked);
                     }
                 }
-
             }
-
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) { }
         });
+
         //클릭시 취소 선 생성
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 TextView tv = (TextView)view.findViewById(R.id.checkboxContent);
+                checked=isChecked.get(position);
+                Log.d("보냄",position+"");
                 if(checked == false){
                     //체크가 안되있다면.
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    checked = true;
+                    isChecked.set(position,true);
+                    update(position,true);
                     count++;
-                }else{
+                }else if(checked==true){
                     tv.setPaintFlags(0);
+                    isChecked.set(position,false);
+                    update(position,false);
                     count--;
                 }
-
-                count++;
             }
         });
-        //길게누르면 -안됨 왠지 모름**
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("Log","dsf");
                 position = i;
                 showMessage();
                 return true;
@@ -154,9 +161,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         dialog.show();
     }
     private void delete_content(final int position){
-        //storage.getReference().child("MapDB").child(uidLists.get(position)).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-        // @Override
-        // public void onSuccess(Void aVoid) {
 
         database.getReference().child("MapDB").child(uidLists.get(position)).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -171,15 +175,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "삭제 실패", Toast.LENGTH_SHORT).show();
             }
         });
-        // }
-        // }).addOnFailureListener(new OnFailureListener() {
-        //    @Override
-        //   public void onFailure(@NonNull Exception e) {
-        //
-
-        //   }
-        // });
-
     }
 
     //추가하기버튼
@@ -190,7 +185,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         ed_cbItem.setText("");
     }
-
 
     class CheckBoxListAdapter extends BaseAdapter {
         ArrayList<CheckBoxItem> items = new ArrayList<CheckBoxItem>();
@@ -240,7 +234,15 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         CheckListDTO checkListDTO = new CheckListDTO();
         checkListDTO.title=title;
         checkListDTO.content=ed_cbItem.getText().toString();
-
+        checkListDTO.isChecked=false;
         database.getReference().child("MapDB").push().setValue(checkListDTO);
+        adapter.notifyDataSetChanged();
     }
+    private void update(int position,Boolean checked){
+        Log.d("받음",position+"");
+       // Log.d("log","업데이트");
+        database.getReference().child("MapDB").child(uidLists.get(position)).child("isChecked").setValue(checked);
+        adapter.notifyDataSetChanged();
+    }
+
 }
