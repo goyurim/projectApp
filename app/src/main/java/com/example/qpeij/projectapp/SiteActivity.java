@@ -3,6 +3,12 @@ package com.example.qpeij.projectapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,7 +29,7 @@ public class SiteActivity extends AppCompatActivity {
     FirebaseDatabase database;
     SiteDTO siteDTO;
     TextView textView;
-    LinearLayout mapView; //지도여기에 넣어라 천명희
+    WebView mapView; //지도여기에 넣어라 천명희
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +40,7 @@ public class SiteActivity extends AppCompatActivity {
         Intent intent=getIntent();
         key = intent.getStringExtra("key");
 
-        mapView=(LinearLayout)findViewById(R.id.mapView);
+        mapView=(WebView) findViewById(R.id.mapVIew);
         textView=(TextView)findViewById(R.id.textView);
 
 
@@ -61,5 +67,51 @@ public class SiteActivity extends AppCompatActivity {
 
             }
         });
+        String url;
+        switch (key){
+            case "서울":
+                url = "http://naver.me/5r6ygG2I";
+                webViewContect(url);
+                break;
+            case "춘천":
+                url = "http://naver.me/5lYU1cKu";
+                webViewContect(url);
+                break;
+            case "강릉":
+                url = "http://naver.me/GcMxatOv";
+                webViewContect(url);
+                break;
+            case "대전":
+                url = "http://naver.me/Fvh4lRT4";
+                webViewContect(url);
+                break;
+            case "대구":
+                url = "http://naver.me/x4tEgeTL";
+                webViewContect(url);
+                break;
+            case "부산":
+                url = "http://naver.me/FiHWyYWJ";
+                webViewContect(url);
+                break;
+            case "전주":
+                url = "http://naver.me/5inQGEG7";
+                webViewContect(url);
+                break;
+                default:
+                    url = "http://naver.me/xYgdxNlu";
+                    webViewContect(url);
+                    break;
+        }
+
+    }
+
+    public void webViewContect(String url){
+        String loadUrl = url;
+        WebSettings webSettings = mapView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        mapView.setWebViewClient(new WebViewClient());
+        mapView.loadUrl(loadUrl);
+
     }
 }

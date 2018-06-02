@@ -28,7 +28,7 @@
         <activity android:name=".Show2Activity" />
         <activity android:name=".CheckBoxList2Activity" />
         <activity android:name=".Map2Activity" />
-        <activity android:name=".SiteActivity"></activity>
+        <activity android:name=".SiteActivity" />
     </application>
 
 </manifest>
