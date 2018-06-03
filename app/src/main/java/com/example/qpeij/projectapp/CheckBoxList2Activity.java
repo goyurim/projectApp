@@ -261,6 +261,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         uidLists.add(r.getKey());
         adapter.notifyDataSetChanged();
     }
+    
     private void update(int position,Boolean checked){
         Log.d("받음",position+"");
        // Log.d("log","업데이트");
