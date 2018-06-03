@@ -234,11 +234,11 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             //여기서 오류 발생
             Boolean checked=isChecked.get(position);
 
-            if(checked == false){
+            if(checked == true){
                 //체크가 안되있다면.
                 Log.d("checked",checked+"");
                 textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            }else if(checked==true){
+            }else if(checked==false){
 
                 textView.setPaintFlags(0);
             }
@@ -261,7 +261,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         uidLists.add(r.getKey());
         adapter.notifyDataSetChanged();
     }
-    
+
     private void update(int position,Boolean checked){
         Log.d("받음",position+"");
        // Log.d("log","업데이트");
