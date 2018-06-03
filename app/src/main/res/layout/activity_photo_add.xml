@@ -20,6 +20,9 @@
     <GridView
         android:numColumns="2"
         android:id="@+id/photoListView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"/>
