@@ -38,6 +38,7 @@ public class TODOListActivity extends AppCompatActivity {
     FirebaseDatabase database;
 
     //코드 내용
+    final static String KEY_ACHIEV = "achiev";
     final static String KEY_ID = "_id";
     final static String KEY_TITLE = "title";
     final static String TABLE_NAME = "listTable";
@@ -71,12 +72,10 @@ public class TODOListActivity extends AppCompatActivity {
                 Cursor cursor = (Cursor) mCursorAdapter.getItem(position);
 
                 String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
-                //int index = cursor.getInt(cursor.getColumnIndex("_id"));
-                //pos = position;
+                int index = cursor.getInt(cursor.getColumnIndex("_id"));
 
                 intent.putExtra("title",title);
-                //intent.putExtra("positionValue",pos);
-                //intent.putExtra("id",index);
+                intent.putExtra("id",index);
                 startActivityForResult(intent,0);
             }
         });
@@ -122,7 +121,8 @@ public class TODOListActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"내용을 입력하세요.",Toast.LENGTH_LONG).show();
         else {
             try {
-                String query = String.format("INSERT INTO %s VALUES(null,'%s');", TABLE_NAME, title);
+                //고유림: 입력 첫 생성되는 리스트는 달성도를 기본값을 0으로 함
+                String query = String.format("INSERT INTO %s VALUES(null,'%s',%d);", TABLE_NAME, title,0);
                 db.execSQL(query);
                 // 아래 메서드를 실행하면 리스트가 갱신된다. 하지만 구글은 이 메서드를 deprecate한다. 고로 다른 방법으로 해보자.
                 // cursor.requery();
@@ -147,9 +147,13 @@ public class TODOListActivity extends AppCompatActivity {
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             TextView tvTitle = (TextView) view.findViewById( R.id.tv_checklistTitle );
+            TextView tvGoal = (TextView)view.findViewById(R.id.tv_goal);
             String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
+            //고유림 입력
+            int achievment = cursor.getInt(cursor.getColumnIndex(KEY_ACHIEV));
             Log.d("스트링 확인",  "" + title);
             tvTitle.setText( title );
+            tvGoal.setText("달성도: "+achievment);
         }
 
         @Override

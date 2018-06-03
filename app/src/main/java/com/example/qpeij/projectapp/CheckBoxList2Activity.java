@@ -44,7 +44,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     EditText ed_cbItem; //체크박스 내용 입력받는 것
     ListView listView;// 리스트 뷰
     TextView checklistTitle;//체크박스 리스트 이름
-    //int id;//아이디 값
+    int id;//아이디 값
     int position;
     int count = 0;
    // int listPositionNum;
@@ -57,6 +57,10 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     FirebaseStorage storage;
     FirebaseDatabase database;
 
+    //고유림: 입력
+    ListDBHelper dbHelper ;
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,13 +69,16 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         //TODOList 화면에서 받음
         Intent intent = getIntent();
         title = intent.getStringExtra("title"); //리스트 제목
-        //id = intent.getIntExtra("id",0);//리스트 아이디값
-       // intent.putExtra("goal",count/adapter.getCount()*100);
-       // listPositionNum = intent.getIntExtra("positionValue",0);
+        id = intent.getIntExtra("id",0);//리스트 아이디값
+
+
         listView = (ListView) findViewById(R.id.checkboxlistview);
         ed_cbItem=(EditText)findViewById(R.id.ed_checkboxItem) ;
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
+
+        //SQLite 디비 고유림: 입력
+        dbHelper = new ListDBHelper(this);
 
         //타이틀 이름 지정
         checklistTitle = (TextView)findViewById(R.id.checklistTitle);
@@ -101,8 +108,16 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                        // checked=checkBoxItem.isChecked;
                         isChecked.add(checkBoxItem.isChecked);
                         if(checkBoxItem.isChecked==true)
-                        {count++;
-                        Log.d("생성Count",count+"");}
+                        {
+                            count++;
+                            Log.d("생성Count",count+"");
+                        }
+                        //고유림: 입력
+//                        int size = adapter.getCount();
+//                        if(size != 0 && count !=0){
+//                            int achiev = (count/size)*100;
+//                            dbHelper.modifyUpgrade(achiev,id);
+//                        }
                     }
                 }
             }
