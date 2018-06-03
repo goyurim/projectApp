@@ -29,7 +29,7 @@ public class SiteActivity extends AppCompatActivity {
     FirebaseDatabase database;
     SiteDTO siteDTO;
     TextView textView;
-    WebView mapView; //지도여기에 넣어라 천명희 >> 윾림쓰가 해벌임
+    WebView mapView; //지도여기에 넣어라 천명희
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

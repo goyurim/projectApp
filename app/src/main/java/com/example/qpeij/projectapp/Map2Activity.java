@@ -59,29 +59,16 @@ public class Map2Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showMoreOnClickButton(View view) {
-        PopupMenu pop = new PopupMenu(getApplicationContext(),view);
-        pop.getMenuInflater().inflate(R.menu.train_menu,pop.getMenu());
+    //지역 지도로 돌아가기
+    public void onClickedVersionBtn2(View view) {
+        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-        pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                //인텐트
-                int id = menuItem.getItemId();
-                if(id==R.id.toGoMapPage){
-                    Intent intent=new Intent(getApplicationContext(),MapActivity.class);
-                    startActivityForResult(intent,11);
-                    finish();
-                }
-                else if(id == R.id.korailPage){
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.letskorail.com/ebizprd/prdMain.do"));
-                    startActivity(intent);
-                    finish();
-                }
-                return Map2Activity.super.onOptionsItemSelected(menuItem);
-            }
-        });
-        pop.show();
-
+    public void TiketingOnClickButton(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.letskorail.com/ebizprd/prdMain.do"));
+        startActivity(intent);
+        finish();
     }
 }
