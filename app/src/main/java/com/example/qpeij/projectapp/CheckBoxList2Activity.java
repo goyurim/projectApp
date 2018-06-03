@@ -47,7 +47,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     //int id;//아이디 값
     int position;
     int count = 0;
-    //int listPositionNum;
+   // int listPositionNum;
     boolean checked = false;
     private List<String> uidLists = new ArrayList<>();
     private List<Boolean> isChecked = new ArrayList<>();
@@ -62,16 +62,12 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_box_list2);
 
-        //권한
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
-        }
-
         //TODOList 화면에서 받음
         Intent intent = getIntent();
         title = intent.getStringExtra("title"); //리스트 제목
         //id = intent.getIntExtra("id",0);//리스트 아이디값
-        //listPositionNum = intent.getIntExtra("positionValue",0);
+       // intent.putExtra("goal",count/adapter.getCount()*100);
+       // listPositionNum = intent.getIntExtra("positionValue",0);
         listView = (ListView) findViewById(R.id.checkboxlistview);
         ed_cbItem=(EditText)findViewById(R.id.ed_checkboxItem) ;
         storage=FirebaseStorage.getInstance();

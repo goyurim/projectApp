@@ -33,7 +33,7 @@ public class TODOListActivity extends AppCompatActivity {
     SQLiteDatabase db;
     Cursor cursor;
     MyCursorAdapter mCursorAdapter;
-
+//int pos;
     //달성도를 위한 파이어베이스 디비
     FirebaseDatabase database;
 
@@ -72,10 +72,10 @@ public class TODOListActivity extends AppCompatActivity {
 
                 String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
                 //int index = cursor.getInt(cursor.getColumnIndex("_id"));
-                int pos = position;
+                //pos = position;
 
                 intent.putExtra("title",title);
-                intent.putExtra("positionValue",pos);
+                //intent.putExtra("positionValue",pos);
                 //intent.putExtra("id",index);
                 startActivityForResult(intent,0);
             }
@@ -159,4 +159,14 @@ public class TODOListActivity extends AppCompatActivity {
             return v;
         }
     }
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==pos){
+            int goal=data.getIntExtra("goal",0);
+            CheckListItem item=(CheckListItem)mCursorAdapter.getItem(pos);
+            item.setGoal(goal);
+        }
+    }*/
 }
