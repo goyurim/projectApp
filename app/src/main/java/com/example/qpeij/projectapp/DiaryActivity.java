@@ -97,7 +97,11 @@ public class DiaryActivity extends AppCompatActivity {
 
     public void diaryWriteButton(View view) {
         upload();
-        Toast.makeText(getApplicationContext(),"작성되었습니다.",Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(),Show2Activity.class);
+        intent.putExtra("local",LocalName);
+        startActivity(intent);
+        finish();
+        //Toast.makeText(getApplicationContext(),"작성되었습니다.",Toast.LENGTH_LONG).show();
     }
     private void upload() {
 
