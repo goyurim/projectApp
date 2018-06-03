@@ -1,6 +1,7 @@
 package com.example.qpeij.projectapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +10,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +32,7 @@ public class SiteActivity extends AppCompatActivity {
     FirebaseDatabase database;
     SiteDTO siteDTO;
     TextView textView;
+    ImageView siteImage1, siteImage2;
     WebView mapView; //지도여기에 넣어라 천명희
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,8 @@ public class SiteActivity extends AppCompatActivity {
 
         mapView=(WebView) findViewById(R.id.mapVIew);
         textView=(TextView)findViewById(R.id.textView);
-
+        siteImage1=(ImageView)findViewById(R.id.siteImage1);
+        siteImage2=(ImageView)findViewById(R.id.siteImage2);
 
         //db
         storage=FirebaseStorage.getInstance();
@@ -59,6 +64,10 @@ public class SiteActivity extends AppCompatActivity {
                         textView.setText(siteDTO.site);
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        Glide.with(getApplicationContext()).load(Uri.parse(siteDTO.siteImage1)).into(siteImage1);
+                        Glide.with(getApplicationContext()).load(Uri.parse(siteDTO.siteImage2)).into(siteImage2);
+                       // siteImage1.setImageURI(siteDTO.siteImage1);
+                       // siteImage2.setImageURI(siteDTO.siteImage2);
                     }
                 }
             }
