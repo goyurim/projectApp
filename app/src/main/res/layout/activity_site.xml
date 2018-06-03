@@ -23,7 +23,8 @@
             android:id="@+id/siteImage1"
             android:layout_width="180dp"
             android:layout_height="180dp"
-            android:layout_marginRight="23dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"/>
         <ImageView
             android:id="@+id/siteImage2"
             android:layout_width="180dp"
