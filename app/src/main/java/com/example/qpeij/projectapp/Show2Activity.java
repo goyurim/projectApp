@@ -60,13 +60,13 @@ public class Show2Activity extends AppCompatActivity {
 
                 showAdapter.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    memoDTO = snapshot.getValue(MemoDTO.class);
+                   // memoDTO = snapshot.getValue(MemoDTO.class);
                     photoItem = snapshot.getValue(PhotoItem.class);
-                    if(LocalName.equals(memoDTO.local)){
+                   /* if(LocalName.equals(memoDTO.local)){
                         title.setText(memoDTO.title);
                         contents.setText(memoDTO.contents);
                         dateText.setText(memoDTO.date);
-                    }
+                    }*/
                     if(LocalName.equals(photoItem.getLocal())){
                         showAdapter.addItem(photoItem);
                         gridView.setAdapter(showAdapter);
@@ -78,7 +78,30 @@ public class Show2Activity extends AppCompatActivity {
 
             }
         });
+        database.getReference().child("MemoDB").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+                //showAdapter.clear();
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    memoDTO = snapshot.getValue(MemoDTO.class);
+                    //photoItem = snapshot.getValue(PhotoItem.class);
+                    if(LocalName.equals(memoDTO.local)){
+                        title.setText(memoDTO.title);
+                        contents.setText(memoDTO.contents);
+                        dateText.setText(memoDTO.date);
+                    }
+                   /* if(LocalName.equals(photoItem.getLocal())){
+                        showAdapter.addItem(photoItem);
+                        gridView.setAdapter(showAdapter);
+                    }*/
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
     private class PhotoAdapter extends BaseAdapter{
         ArrayList<PhotoItem> items = new ArrayList<PhotoItem>();
