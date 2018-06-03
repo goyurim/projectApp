@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/map_image"
     tools:context=".Map2Activity">
-    <Button
-        android:onClick="onClickedVersionBtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="지역"
-        />
 
     <Button
         android:layout_width="wrap_content"
@@ -21,6 +15,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:onClick="onClickedVersionBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="지역"
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

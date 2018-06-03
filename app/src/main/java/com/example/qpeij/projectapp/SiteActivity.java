@@ -67,7 +67,7 @@ public class SiteActivity extends AppCompatActivity {
 
             }
         });
-        String url;
+      /*  String url;
         switch (key){
             case "서울":
                 url = "http://naver.me/5r6ygG2I";
@@ -101,10 +101,10 @@ public class SiteActivity extends AppCompatActivity {
                     url = "http://naver.me/xYgdxNlu";
                     webViewContect(url);
                     break;
-        }
+        }*/
 
     }
-
+/*
     public void webViewContect(String url){
         String loadUrl = url;
         WebSettings webSettings = mapView.getSettings();
@@ -114,4 +114,5 @@ public class SiteActivity extends AppCompatActivity {
         mapView.loadUrl(loadUrl);
 
     }
+      */
 }

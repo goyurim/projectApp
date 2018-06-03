@@ -71,4 +71,6 @@ public class Map2Activity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 }

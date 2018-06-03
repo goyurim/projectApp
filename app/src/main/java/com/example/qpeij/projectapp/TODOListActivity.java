@@ -118,20 +118,24 @@ public class TODOListActivity extends AppCompatActivity {
 
     public void checklistCreateButton(View view) {
         String title = ed_title.getText().toString();
-        try{
-            String query = String.format("INSERT INTO %s VALUES(null,'%s');",TABLE_NAME, title);
-            db.execSQL(query);
-            // 아래 메서드를 실행하면 리스트가 갱신된다. 하지만 구글은 이 메서드를 deprecate한다. 고로 다른 방법으로 해보자.
-            // cursor.requery();
-            cursor = db.rawQuery( querySelectAll, null );
-            mCursorAdapter.changeCursor( cursor );
-        }catch (NullPointerException e){
-            Toast.makeText(getApplicationContext(),"리스트 제목을 입력하시오.",Toast.LENGTH_LONG).show();
+        if(title.equals(""))
+            Toast.makeText(getApplicationContext(),"내용을 입력하세요.",Toast.LENGTH_LONG).show();
+        else {
+            try {
+                String query = String.format("INSERT INTO %s VALUES(null,'%s');", TABLE_NAME, title);
+                db.execSQL(query);
+                // 아래 메서드를 실행하면 리스트가 갱신된다. 하지만 구글은 이 메서드를 deprecate한다. 고로 다른 방법으로 해보자.
+                // cursor.requery();
+                cursor = db.rawQuery(querySelectAll, null);
+                mCursorAdapter.changeCursor(cursor);
+            } catch (NullPointerException e) {
+                Toast.makeText(getApplicationContext(), "리스트 제목을 입력하시오.", Toast.LENGTH_LONG).show();
+            }
+            ed_title.setText("");
+            InputMethodManager imm =
+                    (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(ed_title.getWindowToken(), 0);
         }
-        ed_title.setText("");
-        InputMethodManager imm =
-                (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
-        imm.hideSoftInputFromWindow( ed_title.getWindowToken(), 0 );
     }
 
     private class MyCursorAdapter extends CursorAdapter
