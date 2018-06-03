@@ -94,6 +94,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                 uidLists.clear();
                 isChecked.clear();
                 adapter.clear();
+                count=0;
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     checkBoxItem = snapshot.getValue(CheckBoxItem.class);
                     String uidKey = snapshot.getKey();
@@ -103,15 +104,15 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                         uidLists.add(uidKey);
                        // checked=checkBoxItem.isChecked;
                         isChecked.add(checkBoxItem.isChecked);
+                        if(checkBoxItem.isChecked==true)
+                        {count++;
+                        Log.d("생성Count",count+"");}
                     }
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
-
-        for(int i =0 ;i<isChecked.size();i++)
-            Log.d("isChecked",isChecked.get(i)+"");
         //클릭시 취소 선 생성
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -122,12 +123,9 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                 Log.d("보냄",position+"");
                 if(checked == false){
                     //체크가 안되있다면.
-                    Log.d("checked",checked+"");
-
                     isChecked.set(position,true);
                     update(position,true);
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    count +=1;
                     //counts.set(listPositionNum, count);
 
                 }else if(checked==true){
@@ -135,10 +133,9 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                     isChecked.set(position,false);
                     update(position,false);
                     tv.setPaintFlags(0);
-                    count -=1;
+
                     //counts.set(listPositionNum,count);
                 }
-                //Log.d("Count","Count 갯수 : "+counts.get(listPositionNum));
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -236,7 +233,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
             if(checked == true){
                 //체크가 안되있다면.
-                Log.d("checked",checked+"");
                 textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }else if(checked==false){
 
