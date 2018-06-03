@@ -37,7 +37,7 @@ public class DiaryActivity extends AppCompatActivity {
     FirebaseDatabase database;
     private DatabaseReference mReference;
     MemoDTO memoDTO;
-    String key;
+    String key="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +55,15 @@ public class DiaryActivity extends AppCompatActivity {
         database=FirebaseDatabase.getInstance();
 
         //가져오기
-        database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("MemoDB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+
                     memoDTO = snapshot.getValue(MemoDTO.class);
                     if(LocalName.equals(memoDTO.local)){
+                        key=snapshot.getKey();
                         title.setText(memoDTO.title);
                         date_selected=memoDTO.date;
                         text.setText(date_selected);
@@ -104,13 +106,14 @@ public class DiaryActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"작성되었습니다.",Toast.LENGTH_LONG).show();
     }
     private void upload() {
-
+        delete_content();
         MemoDTO memoDTO = new MemoDTO();
         memoDTO.local=LocalName;
         memoDTO.title=title.getText().toString();
         memoDTO.date=date_selected;
         memoDTO.contents=contents.getText().toString();
-        mReference= database.getReference().child("MapDB");
+        mReference= database.getReference().child("MemoDB");
+        key=mReference.getKey();
         mReference.push().setValue(memoDTO);
 
     }
@@ -118,5 +121,24 @@ public class DiaryActivity extends AppCompatActivity {
     public void clearButton(View view) {
         title.setText("");
         contents.setText("");
+        delete_content();
     }
+    private void delete_content(){
+
+        if(!key.equals("")){
+        database.getReference().child("MemoDB").child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                Toast.makeText(getApplicationContext(), "삭제가 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "삭제 실패", Toast.LENGTH_SHORT).show();
+            }
+        });}
+    }
+
 }
