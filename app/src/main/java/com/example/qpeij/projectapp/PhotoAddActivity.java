@@ -42,7 +42,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class PhotoAddActivity extends AppCompatActivity {
-    Button photoAdd;
+    ImageButton photoAdd;
     TextView textView;
     GridView photoListView;
     String LocalName;
@@ -73,13 +73,13 @@ public class PhotoAddActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
         }
 
-        photoAdd = (Button)findViewById(R.id.photoAdd);
+        photoAdd = (ImageButton)findViewById(R.id.photoAdd);
 
         photoListView=(GridView)findViewById(R.id.photoListView);
         photoAdapter = new PhotoAdapter();
         photoListView.setAdapter(photoAdapter);
 
-        photoAdd = (Button)findViewById(R.id.photoAdd);
+        photoAdd = (ImageButton)findViewById(R.id.photoAdd);
         photoListView=(GridView)findViewById(R.id.photoListView);
         photoAdapter = new PhotoAdapter();
 

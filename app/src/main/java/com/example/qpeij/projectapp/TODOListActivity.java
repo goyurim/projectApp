@@ -43,7 +43,7 @@ public class TODOListActivity extends AppCompatActivity {
     final static String KEY_TITLE = "title";
     final static String TABLE_NAME = "listTable";
 
-    final static String querySelectAll = String.format("SELECT * FROM %s",TABLE_NAME);
+    final static String querySelectAll = String.format("SELECT * FROM %s ORDER BY _id DESC",TABLE_NAME);
 
     long posid;
     ListView listView;

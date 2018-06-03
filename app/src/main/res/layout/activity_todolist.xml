@@ -27,24 +27,24 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_height="0dp"
+        android:layout_height="80dp"
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp">
 
         <EditText
-            android:layout_height="70dp"
-            android:layout_width="0dp"
-            android:layout_weight="6"
+            android:layout_height="50dp"
+            android:layout_width="300dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_vertical"
             android:id="@+id/ed_listTitle"
             android:hint="리스트 제목"/>
 
         <ImageButton
             android:layout_height="50dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/plus"
+            android:layout_width="45dp"
+            android:background="@drawable/file"
             android:layout_gravity="center_vertical"
             android:text="리스트 추가"
             android:textStyle="bold"

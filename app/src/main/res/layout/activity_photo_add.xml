@@ -13,18 +13,22 @@
         android:layout_height="wrap_content"
         android:textSize="50dp"
         android:layout_gravity="center"
+        android:textColor="#000000"
         android:text="지역이름" />
 
-    <Button
-        android:id="@+id/photoAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="사진추가"/>
 
     <GridView
         android:numColumns="2"
         android:id="@+id/photoListView"
         android:layout_width="match_parent"
-        android:layout_height="255dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
 
+    <ImageButton
+        android:id="@+id/photoAdd"
+        android:layout_margin="15sp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:background="@drawable/addtoqueuebutton" />
 </LinearLayout>
