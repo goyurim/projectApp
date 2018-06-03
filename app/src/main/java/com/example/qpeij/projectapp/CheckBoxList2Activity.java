@@ -140,14 +140,21 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                     update(position,true);
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     //counts.set(listPositionNum, count);
-
                 }else if(checked==true){
 
                     isChecked.set(position,false);
                     update(position,false);
                     tv.setPaintFlags(0);
-
                     //counts.set(listPositionNum,count);
+                }
+                TextView achiev = (TextView)findViewById(R.id.achiev);
+                if(size != 0) {
+                    if(count != 0){
+                        int value = (count/size)*100;
+                        achiev.setText("달성도: "+value+"%");
+                    }else{
+                        achiev.setText("달성도: "+0+"%");
+                    }
                 }
             }
         });
@@ -219,9 +226,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             items.clear();
         }
         @Override
-        public int getCount()  {
-            return items.size();
-        }
+        public int getCount()  { return items.size(); }
 
         @Override
         public Object getItem(int position)  {
@@ -253,7 +258,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
                 textView.setPaintFlags(0);
             }
-
+            //size = getCount();
             view.setContent(item.getContent());
             return view;
         }
