@@ -188,14 +188,14 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
     //추가하기버튼
     public void checkBoxCreateButton(View view) {
-       // if(ed_cbItem.getText().toString().equals(""))
-      //      Toast.makeText(getApplicationContext(),"내용을 입력하세요.",Toast.LENGTH_LONG).show();
-      //  else if(!ed_cbItem.getText().toString().equals("")) {
+        if(ed_cbItem.getText().toString().equals(""))
+            Toast.makeText(getApplicationContext(),"내용을 입력하세요.",Toast.LENGTH_LONG).show();
+        else if(!ed_cbItem.getText().toString().equals("")) {
             adapter.addItem(new CheckBoxItem(ed_cbItem.getText().toString()));
             upload();
             adapter.notifyDataSetChanged();
             ed_cbItem.setText("");
-       // }
+        }
     }
 
     class CheckBoxListAdapter extends BaseAdapter {
