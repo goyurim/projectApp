@@ -46,8 +46,6 @@
             android:layout_width="45dp"
             android:background="@drawable/file"
             android:layout_gravity="center_vertical"
-            android:text="리스트 추가"
-            android:textStyle="bold"
             android:textColor="#000000"
             android:onClick="checklistCreateButton"/>
 
