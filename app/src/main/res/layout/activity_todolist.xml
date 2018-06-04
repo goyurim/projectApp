@@ -34,7 +34,8 @@
 
         <EditText
             android:layout_height="50dp"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:layout_gravity="center_vertical"
@@ -42,8 +43,10 @@
             android:hint="리스트 제목"/>
 
         <ImageButton
-            android:layout_height="50dp"
-            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
             android:background="@drawable/file"
             android:layout_gravity="center_vertical"
             android:textColor="#000000"

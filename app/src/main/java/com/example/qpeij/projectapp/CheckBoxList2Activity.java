@@ -253,7 +253,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             Log.d("생성Count2",count+"");
             Log.d("생성Size2",size+"");
             Log.d("생성Goal2",getGoal(count,size)+"");
-            achiev.setText("달성도: " + getGoal(count,size) + "%");
+            achiev.setText(getGoal(count,size) + "%");
             return view;
         }
     }
