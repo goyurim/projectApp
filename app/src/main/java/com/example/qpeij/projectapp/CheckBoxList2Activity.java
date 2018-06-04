@@ -6,10 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +50,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     int id;//아이디 값
     int position;
     int count = 0;
-    int size;
+    //int size;
    // int listPositionNum;
     boolean checked = false;
     private List<String> uidLists = new ArrayList<>();
@@ -89,8 +92,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-        size = adapter.getCount();
-        Log.d("sizeLog1",size+"");
         //data꺼내기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
@@ -139,6 +140,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                     isChecked.set(position,true);
                     update(position,true);
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
                     //counts.set(listPositionNum, count);
                 }else if(checked==true){
 
@@ -146,15 +148,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                     update(position,false);
                     tv.setPaintFlags(0);
                     //counts.set(listPositionNum,count);
-                }
-                TextView achiev = (TextView)findViewById(R.id.achiev);
-                if(size != 0) {
-                    if(count != 0){
-                        int value = (count/size)*100;
-                        achiev.setText("달성도: "+value+"%");
-                    }else{
-                        achiev.setText("달성도: "+0+"%");
-                    }
                 }
             }
         });
@@ -214,8 +207,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             adapter.addItem(new CheckBoxItem(ed_cbItem.getText().toString()));
             upload();
             adapter.notifyDataSetChanged();
-            size = adapter.getCount();
-            Log.d("sizeLog2",size+"");
             ed_cbItem.setText("");
         }
     }
@@ -255,10 +246,8 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                 //체크가 안되있다면.
                 textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }else if(checked==false){
-
                 textView.setPaintFlags(0);
             }
-            //size = getCount();
             view.setContent(item.getContent());
             return view;
         }
