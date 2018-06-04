@@ -23,30 +23,32 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="35sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
+        android:padding="5dp"
         android:textColor="#000000"
-        android:text="제목"/>
+        android:hint="(제목: 비어있음)"/>
     <TextView
         android:id="@+id/dateText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="날짜"
-        android:layout_marginLeft="10dp"
-        android:gravity="left"
+        android:layout_gravity="center"
+        android:hint="(날짜: 비어있음)"
+        android:gravity="center"
         android:textSize="15dp"/>
     <TextView
         android:id="@+id/contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:padding="10dp"
         android:layout_gravity="center"
         android:textSize="20sp"
         android:textColor="#000000"
-        android:text="내용"/>
+        android:hint="(내용: 비어있음)"/>
+
     <GridView
         android:id="@+id/gridView"
         android:numColumns="2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="255dp"/>
 </LinearLayout>

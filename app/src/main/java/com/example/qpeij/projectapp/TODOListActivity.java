@@ -147,13 +147,11 @@ public class TODOListActivity extends AppCompatActivity {
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             TextView tvTitle = (TextView) view.findViewById( R.id.tv_checklistTitle );
-            TextView tvGoal = (TextView)view.findViewById(R.id.tv_goal);
             String title = cursor.getString( cursor.getColumnIndex( KEY_TITLE));
             //고유림 입력
             int achievment = cursor.getInt(cursor.getColumnIndex(KEY_ACHIEV));
             Log.d("스트링 확인",  "" + title);
             tvTitle.setText( title );
-            tvGoal.setText("달성도: "+achievment);
         }
 
         @Override
