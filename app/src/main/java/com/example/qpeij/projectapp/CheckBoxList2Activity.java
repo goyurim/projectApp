@@ -1,14 +1,9 @@
 package com.example.qpeij.projectapp;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
-import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,11 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +44,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     String title;
     CheckBoxListAdapter adapter;
     CheckBoxItem checkBoxItem;
-    FirebaseStorage storage;
+   // FirebaseStorage storage;
     FirebaseDatabase database;
 
     //고유림: 입력
@@ -74,7 +63,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.checkboxlistview);
         ed_cbItem=(EditText)findViewById(R.id.ed_checkboxItem) ;
-        storage=FirebaseStorage.getInstance();
+     //   storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
 
         //SQLite 디비 고유림: 입력
@@ -91,6 +80,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
         size = adapter.getCount();
         Log.d("sizeLog1",size+"");
+
         //data꺼내기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
@@ -149,12 +139,12 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                 }
                 TextView achiev = (TextView)findViewById(R.id.achiev);
                 if(size != 0) {
-                    if(count != 0){
+                   // if(count != 0){
                         int value = (count/size)*100;
                         achiev.setText("달성도: "+value+"%");
-                    }else{
-                        achiev.setText("달성도: "+0+"%");
-                    }
+                   // }else{
+                    //    achiev.setText("달성도: "+0+"%");
+                   // }
                 }
             }
         });
