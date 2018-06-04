@@ -2,7 +2,6 @@ package com.example.qpeij.projectapp;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,13 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.File;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DiaryActivity extends AppCompatActivity {
     String LocalName;
@@ -71,10 +64,8 @@ public class DiaryActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -103,7 +94,6 @@ public class DiaryActivity extends AppCompatActivity {
         intent.putExtra("local",LocalName);
         startActivity(intent);
         finish();
-        //Toast.makeText(getApplicationContext(),"작성되었습니다.",Toast.LENGTH_LONG).show();
     }
     private void upload() {
         delete_content();

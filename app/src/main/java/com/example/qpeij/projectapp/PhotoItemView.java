@@ -35,6 +35,5 @@ public class PhotoItemView extends LinearLayout {
     }
     public void setImageView(String resId) {
         Glide.with(getContext()).load(resId).into(photoView);
-        //photoView.setImageURI(resId);
     }
 }

@@ -1,10 +1,5 @@
 package com.example.qpeij.projectapp;
 
-/**
- * Created by qpeij on 2018-05-28.
- */
-
-
 public class CheckBoxItem {
     String title;
     String content;

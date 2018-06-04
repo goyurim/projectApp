@@ -72,8 +72,6 @@ public class Map2Activity extends AppCompatActivity {
                     siteDTO = snapshot.getValue(SiteDTO.class);
 
                     if(key.equals(siteDTO.local)){
-
-
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
                         Log.d("yoon if",latitude+"");
@@ -88,12 +86,6 @@ public class Map2Activity extends AppCompatActivity {
 
             }
         });
-
-        Log.d("yoon",latitude+"");
-
-        //intent.putExtra("latitude",latitude);
-        //intent.putExtra("longitude",longitude);
-       // startActivity(intent);
     }
     public void onClickedBtn3(View view) {
         intent =  new Intent(getApplicationContext(),SiteActivity.class);
@@ -209,9 +201,7 @@ public class Map2Activity extends AppCompatActivity {
 
             }
         });
-
     }
-
     public void onClickedBtn7(View view) {
         intent =  new Intent(getApplicationContext(),SiteActivity.class);
         key="전주";
@@ -241,7 +231,6 @@ public class Map2Activity extends AppCompatActivity {
         });
 
     }
-
     public void onClickedBtn8(View view) {
         intent =  new Intent(getApplicationContext(),SiteActivity.class);
         key="여수";

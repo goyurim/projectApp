@@ -30,10 +30,10 @@ public class SiteActivity extends AppCompatActivity {
     private NMapView mMapView;// 지도 화면 View
     private final String CLIENT_ID = "yMxM1_6BoFVYF8jXenYu";// 애플리케이션 클라이언트 아이디 값
 
-     String key;
-     double latitude;
-     double longitude;
-     String site;
+    String key;
+    double latitude;
+    double longitude;
+    String site;
     FirebaseStorage storage;
     FirebaseDatabase database;
     SiteDTO siteDTO;
@@ -59,7 +59,6 @@ public class SiteActivity extends AppCompatActivity {
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
 
-        //database.getReference().child("SiteDB").chil(key).addValueEventListener(new ValueEventListener() {
         database.getReference().child("SiteDB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -69,17 +68,8 @@ public class SiteActivity extends AppCompatActivity {
 
                     if(key.equals(siteDTO.local)){
                         textView.setText(siteDTO.site);
-                       // latitude=siteDTO.latitude;
-                       // longitude=siteDTO.longtitude;
                         Glide.with(getApplicationContext()).load(Uri.parse(siteDTO.siteImage1)).into(siteImage1);
                         Glide.with(getApplicationContext()).load(Uri.parse(siteDTO.siteImage2)).into(siteImage2);
-
-                        //key값 받아오기
-                        Log.d("log","보낸"+latitude);
-                        Log.d("log","보낸"+longitude);
-                        // siteImage1.setImageURI(siteDTO.siteImage1);
-                       // siteImage2.setImageURI(siteDTO.siteImage2);
-
                     }
                 }
             }
@@ -94,41 +84,6 @@ public class SiteActivity extends AppCompatActivity {
 
         Log.d("yoon",latitude+"");
         Log.d("yoon",longitude+"");
-      /*  String url;
-        switch (key){
-            case "서울":
-                url = "http://naver.me/5r6ygG2I";
-                webViewContect(url);
-                break;
-            case "춘천":
-                url = "http://naver.me/5lYU1cKu";
-                webViewContect(url);
-                break;
-            case "강릉":
-                url = "http://naver.me/GcMxatOv";
-                webViewContect(url);
-                break;
-            case "대전":
-                url = "http://naver.me/Fvh4lRT4";
-                webViewContect(url);
-                break;
-            case "대구":
-                url = "http://naver.me/x4tEgeTL";
-                webViewContect(url);
-                break;
-            case "부산":
-                url = "http://naver.me/FiHWyYWJ";
-                webViewContect(url);
-                break;
-            case "전주":
-                url = "http://naver.me/5inQGEG7";
-                webViewContect(url);
-                break;
-                default:
-                    url = "http://naver.me/xYgdxNlu";
-                    webViewContect(url);
-                    break;
-        }*/
 
     }
 

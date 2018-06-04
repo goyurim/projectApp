@@ -37,7 +37,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     int position;
     int count = 0;
     int size;
-   // int listPositionNum;
     boolean checked = false;
     private List<String> uidLists = new ArrayList<>();
     private List<Boolean> isChecked = new ArrayList<>();
@@ -45,12 +44,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     CheckBoxListAdapter adapter;
     CheckBoxItem checkBoxItem;
     TextView achiev;
-   // FirebaseStorage storage;
     FirebaseDatabase database;
-
-    //고유림: 입력
-    //ListDBHelper dbHelper ;
-    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +59,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.checkboxlistview);
         ed_cbItem=(EditText)findViewById(R.id.ed_checkboxItem) ;
         achiev = (TextView)findViewById(R.id.achiev);
-     //   storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
-
-        //SQLite 디비 고유림: 입력
-        //dbHelper = new ListDBHelper(this);
 
         //타이틀 이름 지정
         checklistTitle = (TextView)findViewById(R.id.checklistTitle);
@@ -81,9 +71,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         size = adapter.getCount();
-        Log.d("sizeLog1",size+"");
-       // achiev.setText("달성도: 0%");
-        //data꺼내기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -104,15 +91,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                         if(checkBoxItem.isChecked==true)
                         {
                             count++;
-
-
                         }
-                        //고유림: 입력
-//                        int size = adapter.getCount();
-//                        if(size != 0 && count !=0){
-//                            int achiev = (count/size)*100;
-//                            dbHelper.modifyUpgrade(achiev,id);
-//                        }
                     }
                 }
             }
@@ -130,22 +109,18 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tv = (TextView)view.findViewById(R.id.checkboxContent);
                 checked=isChecked.get(position);
-                //tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 Log.d("보냄",position+"");
                 if(checked == false){
                     //체크가 안되있다면.
                     isChecked.set(position,true);
                     update(position,true);
                     tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    //counts.set(listPositionNum, count);
                 }else if(checked==true){
 
                     isChecked.set(position,false);
                     update(position,false);
                     tv.setPaintFlags(0);
-                    //counts.set(listPositionNum,count);
                 }
-
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -195,7 +170,6 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             }
         });
     }
-
     //추가하기버튼
     public void checkBoxCreateButton(View view) {
         if(ed_cbItem.getText().toString().equals(""))
@@ -204,12 +178,9 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             adapter.addItem(new CheckBoxItem(ed_cbItem.getText().toString()));
             upload();
             adapter.notifyDataSetChanged();
-           // size = adapter.getCount();
-           // Log.d("sizeLog2",size+"");
             ed_cbItem.setText("");
         }
     }
-
     class CheckBoxListAdapter extends BaseAdapter {
         ArrayList<CheckBoxItem> items = new ArrayList<CheckBoxItem>();
         public void clear() {
@@ -271,24 +242,16 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         uidLists.add(r.getKey());
         adapter.notifyDataSetChanged();
     }
-
     private void update(int position,Boolean checked){
         Log.d("받음",position+"");
-       // Log.d("log","업데이트");
         database.getReference().child("MapDB").child(uidLists.get(position)).child("isChecked").setValue(checked);
-       ///
-
-
         adapter.notifyDataSetChanged();
-
     }
 
     public int getGoal(int count,int size) {
         int value=0;
         if (size != 0) {
-
             value = (int)(((double)count / size) * 100);
-
         }
         return value;
     }
