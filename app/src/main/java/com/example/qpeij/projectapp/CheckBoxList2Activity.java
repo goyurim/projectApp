@@ -44,6 +44,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     String title;
     CheckBoxListAdapter adapter;
     CheckBoxItem checkBoxItem;
+    TextView achiev;
    // FirebaseStorage storage;
     FirebaseDatabase database;
 
@@ -63,6 +64,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.checkboxlistview);
         ed_cbItem=(EditText)findViewById(R.id.ed_checkboxItem) ;
+        achiev = (TextView)findViewById(R.id.achiev);
      //   storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
 
@@ -80,7 +82,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
         size = adapter.getCount();
         Log.d("sizeLog1",size+"");
-
+       // achiev.setText("달성도: 0%");
         //data꺼내기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,7 +104,8 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                         if(checkBoxItem.isChecked==true)
                         {
                             count++;
-                            Log.d("생성Count",count+"");
+
+
                         }
                         //고유림: 입력
 //                        int size = adapter.getCount();
@@ -116,6 +119,11 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
+
+        Log.d("생성Count",count+"");
+        Log.d("생성Size",size+"");
+        achiev.setText("달성도: " + getGoal(count,size) + "%");
+
         //클릭시 취소 선 생성
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -137,15 +145,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                     tv.setPaintFlags(0);
                     //counts.set(listPositionNum,count);
                 }
-                TextView achiev = (TextView)findViewById(R.id.achiev);
-                if(size != 0) {
-                   // if(count != 0){
-                        int value = (count/size)*100;
-                        achiev.setText("달성도: "+value+"%");
-                   // }else{
-                    //    achiev.setText("달성도: "+0+"%");
-                   // }
-                }
+
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -204,8 +204,8 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             adapter.addItem(new CheckBoxItem(ed_cbItem.getText().toString()));
             upload();
             adapter.notifyDataSetChanged();
-            size = adapter.getCount();
-            Log.d("sizeLog2",size+"");
+           // size = adapter.getCount();
+           // Log.d("sizeLog2",size+"");
             ed_cbItem.setText("");
         }
     }
@@ -248,8 +248,12 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
                 textView.setPaintFlags(0);
             }
-            //size = getCount();
             view.setContent(item.getContent());
+            size=adapter.getCount();
+            Log.d("생성Count2",count+"");
+            Log.d("생성Size2",size+"");
+            Log.d("생성Goal2",getGoal(count,size)+"");
+            achiev.setText("달성도: " + getGoal(count,size) + "%");
             return view;
         }
     }
@@ -272,7 +276,20 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         Log.d("받음",position+"");
        // Log.d("log","업데이트");
         database.getReference().child("MapDB").child(uidLists.get(position)).child("isChecked").setValue(checked);
+       ///
+
+
         adapter.notifyDataSetChanged();
+
     }
 
+    public int getGoal(int count,int size) {
+        int value=0;
+        if (size != 0) {
+
+            value = (int)(((double)count / size) * 100);
+
+        }
+        return value;
+    }
 }
