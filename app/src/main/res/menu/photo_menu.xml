@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/setMain"
-        android:title="대표사진설정"/>
-    <item
         android:id="@+id/deletePhoto"
         android:title="삭제"/>
 </menu>

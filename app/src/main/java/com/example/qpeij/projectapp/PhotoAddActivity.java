@@ -139,10 +139,8 @@ public class PhotoAddActivity extends AppCompatActivity {
                 public boolean onMenuItemClick(MenuItem menuItem) {
 
                     int id = menuItem.getItemId();
-                    if(id==R.id.setMain){
-                        //대표사진
-                    }
-                    else if(id==R.id.deletePhoto) {
+
+                    if(id==R.id.deletePhoto) {
                         //삭제
                         delete_content(position);
                         //갱신
