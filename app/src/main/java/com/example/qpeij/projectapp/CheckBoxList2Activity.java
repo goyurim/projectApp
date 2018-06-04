@@ -1,14 +1,9 @@
 package com.example.qpeij.projectapp;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
-import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,11 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,14 +37,15 @@ public class CheckBoxList2Activity extends AppCompatActivity {
     int position;
     int count = 0;
     int size;
-   // int listPositionNum;
+    // int listPositionNum;
     boolean checked = false;
     private List<String> uidLists = new ArrayList<>();
     private List<Boolean> isChecked = new ArrayList<>();
     String title;
     CheckBoxListAdapter adapter;
     CheckBoxItem checkBoxItem;
-    FirebaseStorage storage;
+    TextView achiev;
+    // FirebaseStorage storage;
     FirebaseDatabase database;
 
     //고유림: 입력
@@ -74,7 +64,8 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.checkboxlistview);
         ed_cbItem=(EditText)findViewById(R.id.ed_checkboxItem) ;
-        storage=FirebaseStorage.getInstance();
+        achiev = (TextView)findViewById(R.id.achiev);
+        //   storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
 
         //SQLite 디비 고유림: 입력
@@ -91,6 +82,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
         size = adapter.getCount();
         Log.d("sizeLog1",size+"");
+        // achiev.setText("달성도: 0%");
         //data꺼내기
         database.getReference().child("MapDB").addValueEventListener(new ValueEventListener() {
             @Override
@@ -107,12 +99,13 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                         adapter.addItem(checkBoxItem);
                         listView.setAdapter(adapter);
                         uidLists.add(uidKey);
-                       // checked=checkBoxItem.isChecked;
+                        // checked=checkBoxItem.isChecked;
                         isChecked.add(checkBoxItem.isChecked);
                         if(checkBoxItem.isChecked==true)
                         {
                             count++;
-                            Log.d("생성Count",count+"");
+
+
                         }
                         //고유림: 입력
 //                        int size = adapter.getCount();
@@ -126,6 +119,11 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
+
+        Log.d("생성Count",count+"");
+        Log.d("생성Size",size+"");
+        achiev.setText("달성도: " + getGoal(count,size) + "%");
+
         //클릭시 취소 선 생성
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -147,15 +145,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
                     tv.setPaintFlags(0);
                     //counts.set(listPositionNum,count);
                 }
-                TextView achiev = (TextView)findViewById(R.id.achiev);
-                if(size != 0) {
-                    if(count != 0){
-                        int value = (count/size)*100;
-                        achiev.setText("달성도: "+value+"%");
-                    }else{
-                        achiev.setText("달성도: "+0+"%");
-                    }
-                }
+
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -214,8 +204,8 @@ public class CheckBoxList2Activity extends AppCompatActivity {
             adapter.addItem(new CheckBoxItem(ed_cbItem.getText().toString()));
             upload();
             adapter.notifyDataSetChanged();
-            size = adapter.getCount();
-            Log.d("sizeLog2",size+"");
+            // size = adapter.getCount();
+            // Log.d("sizeLog2",size+"");
             ed_cbItem.setText("");
         }
     }
@@ -258,8 +248,12 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
                 textView.setPaintFlags(0);
             }
-            //size = getCount();
             view.setContent(item.getContent());
+            size=adapter.getCount();
+            Log.d("생성Count2",count+"");
+            Log.d("생성Size2",size+"");
+            Log.d("생성Goal2",getGoal(count,size)+"");
+            achiev.setText("달성도: " + getGoal(count,size) + "%");
             return view;
         }
     }
@@ -280,9 +274,22 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
     private void update(int position,Boolean checked){
         Log.d("받음",position+"");
-       // Log.d("log","업데이트");
+        // Log.d("log","업데이트");
         database.getReference().child("MapDB").child(uidLists.get(position)).child("isChecked").setValue(checked);
+        ///
+
+
         adapter.notifyDataSetChanged();
+
     }
 
+    public int getGoal(int count,int size) {
+        int value=0;
+        if (size != 0) {
+
+            value = (int)(((double)count / size) * 100);
+
+        }
+        return value;
+    }
 }
