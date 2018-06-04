@@ -8,12 +8,9 @@
     tools:context="com.example.qpeij.projectapp.MapActivity">
 
     <ImageButton
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/subwaymapicon"
+        android:background="@drawable/area"
         android:onClick="onClickedVersionBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
