@@ -29,7 +29,7 @@ public class MapViewFragmentNaver extends NMapFragment implements NMapView.OnMap
     NMapPOIdata poidata;
     int markerId = NMapPOIflagType.PIN;
     SiteActivity siteActivity;
-    double longitude, latitude;
+    double longitude=0, latitude=0;
     String key;
 
     @Override
@@ -84,10 +84,8 @@ public class MapViewFragmentNaver extends NMapFragment implements NMapView.OnMap
 
         poidata = new NMapPOIdata(1, mapViewerResourceProvider);
         poidata.beginPOIdata(1);
-
-        Log.d("log","받은"+latitude);
-        Log.d("log","받은" +longitude);
-        poidata.addPOIitem(longitude, latitude, key, markerId, 11);
+        
+        poidata.addPOIitem( latitude,longitude, key, markerId, 11);
         poidata.endPOIdata();
 
         NMapPOIdataOverlay poiDataOverlay = mapOverlayManager.createPOIdataOverlay(poidata, null);
