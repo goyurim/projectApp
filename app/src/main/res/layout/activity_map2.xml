@@ -8,17 +8,13 @@
     tools:context=".Map2Activity">
 
     <ImageButton
-        android:layout_width="110dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="444dp"
+        android:layout_width="129dp"
+        android:layout_height="74dp"
+
         android:background="@drawable/tiket"
         android:onClick="TiketingOnClickButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:layout_width="match_parent"
