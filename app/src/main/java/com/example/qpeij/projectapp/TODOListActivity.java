@@ -33,9 +33,6 @@ public class TODOListActivity extends AppCompatActivity {
     SQLiteDatabase db;
     Cursor cursor;
     MyCursorAdapter mCursorAdapter;
-//int pos;
-    //달성도를 위한 파이어베이스 디비
-    FirebaseDatabase database;
 
     //코드 내용
     final static String KEY_ACHIEV = "achiev";

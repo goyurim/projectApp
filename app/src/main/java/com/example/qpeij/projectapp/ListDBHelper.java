@@ -14,7 +14,6 @@ public class ListDBHelper extends SQLiteOpenHelper {
     }
     @Override
 
-    //고유림 수정
     public void onCreate(SQLiteDatabase db) {
         // AUTOINCREMENT 속성 사용 시 PRIMARY KEY로 지정한다.
         String query = String.format( "CREATE TABLE %s ("

@@ -67,7 +67,6 @@ public class PhotoAddActivity extends AppCompatActivity {
         LocalName=getIntent().getStringExtra("local");
         textView.setText(LocalName);
 
-
         //권한
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
@@ -207,13 +206,8 @@ public class PhotoAddActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
-
-                photoAdapter.addItem(new PhotoItem(getPath(uri)));
-                photoAdapter.notifyDataSetChanged();
-            //} catch (IOException e) {
-             //   e.printStackTrace();
-           // }
-
+            photoAdapter.addItem(new PhotoItem(getPath(uri)));
+            photoAdapter.notifyDataSetChanged();
             upload(getPath(uri));
         }
     }
@@ -229,28 +223,28 @@ public class PhotoAddActivity extends AppCompatActivity {
         return cursor.getString(index);
     }
     private void upload(String uri){
-            StorageReference storageRef = storage.getReference();
+        StorageReference storageRef = storage.getReference();
 
-            Uri file = Uri.fromFile(new File(uri));
-            StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-            UploadTask uploadTask = riversRef.putFile(file);
+        Uri file = Uri.fromFile(new File(uri));
+        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(file);
 
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
-                    ImageDTO imageDTO = new ImageDTO();
-                    imageDTO.local=LocalName;
-                    imageDTO.image =(downloadUrl.toString());
+                ImageDTO imageDTO = new ImageDTO();
+                imageDTO.local=LocalName;
+                imageDTO.image =(downloadUrl.toString());
 
-                    database.getReference().child("MapDB").push().setValue(imageDTO);
-                }
-            });
+                database.getReference().child("MapDB").push().setValue(imageDTO);
+            }
+        });
     }
 }
