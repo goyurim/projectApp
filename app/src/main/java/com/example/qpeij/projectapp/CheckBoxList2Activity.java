@@ -101,7 +101,7 @@ public class CheckBoxList2Activity extends AppCompatActivity {
 
         Log.d("생성Count",count+"");
         Log.d("생성Size",size+"");
-        achiev.setText("달성도: " + getGoal(count,size) + "%");
+        achiev.setText(getGoal(count,size) + "%");
 
         //클릭시 취소 선 생성
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -112,6 +112,7 @@ public class DiaryActivity extends AppCompatActivity {
         title.setText("");
         contents.setText("");
         delete_content();
+        Toast.makeText(getApplicationContext(), "삭제가 완료 되었습니다.", Toast.LENGTH_SHORT).show();
     }
     private void delete_content(){
 
@@ -120,13 +121,6 @@ public class DiaryActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
 
-                Toast.makeText(getApplicationContext(), "삭제가 완료 되었습니다.", Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "삭제 실패", Toast.LENGTH_SHORT).show();
             }
         });}
     }
