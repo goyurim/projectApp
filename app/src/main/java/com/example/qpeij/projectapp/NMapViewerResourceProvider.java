@@ -195,7 +195,6 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 	 * 
 	 * @see NMapPOIflagType
 	 */
-	@SuppressLint("LongLogTag")
 	@Override
 	protected int findResourceIdForMarker(int markerId, boolean focused) {
 		int resourceId = 0;
@@ -252,8 +251,8 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 	public Drawable[] getLocationDot() {
 		Drawable[] drawable = new Drawable[2];
 
-		//drawable[0] = mContext.getResources().getDrawable(R.drawable.pubtrans_ic_mylocation_off);
-		//drawable[1] = mContext.getResources().getDrawable(R.drawable.pubtrans_ic_mylocation_on);
+		drawable[0] = mContext.getResources().getDrawable(R.drawable.pubtrans_ic_mylocation_off);
+		drawable[1] = mContext.getResources().getDrawable(R.drawable.pubtrans_ic_mylocation_on);
 
 		for (int i = 0; i < drawable.length; i++) {
 			int w = drawable[i].getIntrinsicWidth() / 2;
@@ -315,12 +314,12 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 		Drawable drawable = null;
 
 		if (markerId >= NMapPOIflagType.NUMBER_BASE && markerId < NMapPOIflagType.NUMBER_END) { // Direction Number icons
-			//int resourceId = (focused) ? R.drawable.ic_map_no_02 : R.drawable.ic_map_no_01;
+			int resourceId = (focused) ? R.drawable.ic_map_no_02 : R.drawable.ic_map_no_01;
 			int fontColor = (focused) ? POI_FONT_COLOR_ALPHABET : POI_FONT_COLOR_NUMBER;
 
 			String strNumber = String.valueOf(markerId - NMapPOIflagType.NUMBER_BASE);
 
-			//drawable = getDrawableWithNumber(resourceId, strNumber, 0.0F, fontColor, POI_FONT_SIZE_NUMBER);
+			drawable = getDrawableWithNumber(resourceId, strNumber, 0.0F, fontColor, POI_FONT_SIZE_NUMBER);
 		} else if (markerId >= NMapPOIflagType.CUSTOM_BASE && markerId < NMapPOIflagType.CUSTOM_END) { // Custom POI icons
 
 		}
@@ -375,12 +374,12 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 			NMapPOIitem poiItem = (NMapPOIitem)item;
 
 			if (poiItem.showRightButton()) {
-				Drawable drawable = mContext.getResources().getDrawable(R.drawable.calendar);
+				Drawable drawable = mContext.getResources().getDrawable(R.drawable.speech_bubble);
 				return drawable;
 			}
 		}
 
-		Drawable drawable = mContext.getResources().getDrawable(R.drawable.calendar);
+		Drawable drawable = mContext.getResources().getDrawable(R.drawable.speech_bubble);
 
 		return drawable;
 	}
@@ -406,9 +405,9 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 			if (poiItem.showRightButton()) {
 				Drawable[] drawable = new Drawable[3];
 
-				//drawable[0] = mContext.getResources().getDrawable(R.drawable.btn_green_normal);
-				//drawable[1] = mContext.getResources().getDrawable(R.drawable.btn_green_pressed);
-				//drawable[2] = mContext.getResources().getDrawable(R.drawable.btn_green_highlight);
+				drawable[0] = mContext.getResources().getDrawable(R.drawable.btn_green_normal);
+				drawable[1] = mContext.getResources().getDrawable(R.drawable.btn_green_pressed);
+				drawable[2] = mContext.getResources().getDrawable(R.drawable.btn_green_highlight);
 
 				return drawable;
 			}
@@ -427,8 +426,8 @@ public class NMapViewerResourceProvider extends NMapResourceProvider implements
 
 				switch (poiItem.getRightAccessoryId()) {
 					case NMapPOIflagType.CLICKABLE_ARROW:
-						//drawable[0] = mContext.getResources().getDrawable(R.drawable.pin_ballon_arrow);
-						//drawable[1] = mContext.getResources().getDrawable(R.drawable.pin_ballon_on_arrow);
+						drawable[0] = mContext.getResources().getDrawable(R.drawable.calendar);
+						drawable[1] = mContext.getResources().getDrawable(R.drawable.calendar);
 						drawable[2] = mContext.getResources().getDrawable(R.drawable.calendar);
 						break;
 				}

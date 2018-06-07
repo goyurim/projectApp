@@ -85,7 +85,7 @@ public class MapViewFragmentNaver extends NMapFragment implements NMapView.OnMap
         poidata = new NMapPOIdata(1, mapViewerResourceProvider);
         poidata.beginPOIdata(1);
 
-        poidata.addPOIitem( latitude,longitude, key, markerId, 11);
+        poidata.addPOIitem( longitude,latitude, key, markerId, 11);
         poidata.endPOIdata();
 
         NMapPOIdataOverlay poiDataOverlay = mapOverlayManager.createPOIdataOverlay(poidata, null);
