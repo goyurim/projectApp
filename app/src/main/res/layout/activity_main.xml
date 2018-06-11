@@ -5,24 +5,26 @@
     android:background="@drawable/back"
     android:orientation="vertical"
     >
+
     <ImageView
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/maintitle"
         android:layout_gravity="center"
-        android:layout_margin="40dp"/>
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/maintitle" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="152dp"
+        android:layout_height="160dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:orientation="horizontal">
         <!--맵 이동 버튼-->
         <Button
             android:layout_width="0dp"
-            android:layout_height="140dp"
+            android:layout_height="150dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/map"
@@ -32,7 +34,7 @@
         <!--체크리스트 이동 버튼-->
         <Button
             android:layout_width="0dp"
-            android:layout_height="140dp"
+            android:layout_height="150dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/list"
