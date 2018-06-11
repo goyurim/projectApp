@@ -255,4 +255,5 @@ public class CheckBoxList2Activity extends AppCompatActivity {
         }
         return value;
     }
+
 }

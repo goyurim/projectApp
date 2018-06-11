@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Map2Activity extends AppCompatActivity {
     SiteDTO siteDTO;
-    String key;
+    String key,site;
     FirebaseDatabase database;
     double latitude;
     double longitude;
@@ -46,6 +46,8 @@ public class Map2Activity extends AppCompatActivity {
 
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);
@@ -74,7 +76,8 @@ public class Map2Activity extends AppCompatActivity {
                     if(key.equals(siteDTO.local)){
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
-                        Log.d("yoon if",latitude+"");
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);
@@ -103,6 +106,8 @@ public class Map2Activity extends AppCompatActivity {
 
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);
@@ -132,6 +137,8 @@ public class Map2Activity extends AppCompatActivity {
 
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);
@@ -161,6 +168,8 @@ public class Map2Activity extends AppCompatActivity {
 
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);
@@ -190,6 +199,8 @@ public class Map2Activity extends AppCompatActivity {
 
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);
@@ -218,6 +229,8 @@ public class Map2Activity extends AppCompatActivity {
 
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);
@@ -247,6 +260,8 @@ public class Map2Activity extends AppCompatActivity {
 
                         latitude=siteDTO.latitude;
                         longitude=siteDTO.longtitude;
+                        site=siteDTO.site;
+                        intent.putExtra("site",site);
                         intent.putExtra("latitude",latitude);
                         intent.putExtra("longitude",longitude);
                         startActivity(intent);

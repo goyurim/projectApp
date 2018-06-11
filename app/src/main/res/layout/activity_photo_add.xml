@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
+    android:background="@drawable/note_back"
     android:orientation="vertical"
     tools:context="com.example.qpeij.projectapp.PhotoAddActivity">
 
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:textColor="#000000"
         android:text="지역이름" />
 

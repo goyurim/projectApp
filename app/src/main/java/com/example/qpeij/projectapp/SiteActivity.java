@@ -52,6 +52,7 @@ public class SiteActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         key=intent.getStringExtra("key");
+        site=intent.getStringExtra("site");
         latitude=intent.getDoubleExtra("latitude",0);
         longitude=intent.getDoubleExtra("longitude",0);
 

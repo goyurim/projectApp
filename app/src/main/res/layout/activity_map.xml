@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/map_image"
+    android:background="@drawable/map_area_back"
     tools:context="com.example.qpeij.projectapp.MapActivity">
 
     <ImageButton
@@ -21,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:onClick="onClickedLocalBtn1"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
@@ -29,17 +28,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:textSize="20sp"
+        android:onClick="onClickedLocalBtn1"
         android:text="강원도"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintVertical_bias="0.194" />
 
     <Button
-        android:onClick="onClickedLocalBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -47,17 +46,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="140dp"
         android:background="@null"
-        android:textSize="20sp"
+        android:onClick="onClickedLocalBtn2"
         android:text="경기도"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
+        app:layout_constraintHorizontal_bias="0.342"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintVertical_bias="0.012" />
 
     <Button
-        android:onClick="onClickedLocalBtn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -65,32 +64,33 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:textSize="20sp"
+        android:onClick="onClickedLocalBtn3"
         android:text="충청도"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintHorizontal_bias="0.342"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476" />
+        app:layout_constraintVertical_bias="0.478" />
 
     <Button
-        android:onClick="onClickedLocalBtn4"
-        android:layout_width="88dp"
+        android:layout_width="93dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:textSize="20sp"
+        android:onClick="onClickedLocalBtn4"
         android:text="경상도"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.725"
+        app:layout_constraintHorizontal_bias="0.709"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
+        app:layout_constraintVertical_bias="0.602" />
 
     <Button
         android:onClick="onClickedLocalBtn5"
@@ -112,17 +112,17 @@
 
 
     <Button
-        android:onClick="onClickedLocalBtn6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@null"
-        android:textSize="20sp"
+        android:onClick="onClickedLocalBtn6"
         android:text="제주도"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
